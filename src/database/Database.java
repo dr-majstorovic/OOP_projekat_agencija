@@ -12,30 +12,12 @@ public class Database {
     private static String DB_name = "agencija";
     private static Connection connection;
 
-    public static void DBConnect() throws SQLException /*, ClassNotFoundException*/ {
-        //Class.forName("com.mysql.cj.jdbc.Driver");
-        connectionUrl = "jdbc:mysql://localhost" + ":" + port + "/" + DB_name;
-        connection = DriverManager.getConnection(connectionUrl, DB_user, DB_password);
-    }
-
-    public static void main(String[] args) {
+    public static void init() { // main() -> init()
         try {
-            DBConnect();
+            connectionUrl = "jdbc:mysql://localhost" + ":" + port + "/" + DB_name;
+            connection = DriverManager.getConnection(connectionUrl, DB_user, DB_password);
             System.out.println("Uspjesno ste se konektovali na bazu:" + connectionUrl);
-            ResultSet resultSet = null;
-            Statement statement = connection.createStatement();
-            String SQLQuery = "SELECT * FROM admin";
-            resultSet = statement.executeQuery(SQLQuery);
-            System.out.println("--------------------------------------------");
-            while (resultSet.next()) {
-                String result = resultSet.getString(1) + ", " + resultSet.getString(2)
-                        + ", " + resultSet.getString(3) + ", " + resultSet.getString(4)
-                        + ", " + resultSet.getString(5);
-                System.out.println(result);
-                System.out.println("--------------------------------------------");
-            }
 
-            statement.close();
             connection.close();
         } catch (SQLException e){
             e.printStackTrace();
