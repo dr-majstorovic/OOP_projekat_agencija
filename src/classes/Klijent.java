@@ -4,8 +4,8 @@ public class Klijent extends Korisnik{
 
     private String brojTelefona, JMBG, brojRacuna;
 
-    public Klijent(String ime, String prezime, String korisnickoIme, String lozinka, String brojTelefona, String JMBG, String brojRacuna){
-        super(ime, prezime, korisnickoIme, lozinka);
+    public Klijent(int id, String ime, String prezime, String korisnickoIme, String lozinka, String brojTelefona, String JMBG, String brojRacuna){
+        super(id, ime, prezime, korisnickoIme, lozinka);
         this.brojTelefona = brojTelefona;
         this.JMBG = JMBG;
         this.brojRacuna = brojRacuna;
