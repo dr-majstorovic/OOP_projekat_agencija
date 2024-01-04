@@ -54,4 +54,8 @@ public class Aranzman {
     public Smjestaj getSmjestaj() {
         return smjestaj;
     }
+
+    public long getTrajanje() {
+        return (datumDolaska.getTime() - datumPolaska.getTime() / (1000 * 60 * 60)) % 365;
+    }
 }
