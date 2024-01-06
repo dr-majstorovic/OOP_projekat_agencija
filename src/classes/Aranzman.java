@@ -1,6 +1,7 @@
 package classes;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
 
 public class Aranzman {
 
@@ -8,11 +9,11 @@ public class Aranzman {
     private String naziv;
     private String destinacija;
     private Prevoz prevoz;
-    private Date datumPolaska, datumDolaska;
+    private LocalDate datumPolaska, datumDolaska;
     private double cijena;
     private Smjestaj smjestaj;
 
-    public Aranzman(int id, String naziv, String destinacija, Prevoz prevoz, Date datumPolaska, Date datumDolaska, double cijena, Smjestaj smjestaj) {
+    public Aranzman(int id, String naziv, String destinacija, Prevoz prevoz, LocalDate datumPolaska, LocalDate datumDolaska, double cijena, Smjestaj smjestaj) {
         this.id = id;
         this.naziv = naziv;
         this.destinacija = destinacija;
@@ -39,11 +40,11 @@ public class Aranzman {
         return prevoz;
     }
 
-    public Date getDatumPolaska() {
+    public LocalDate getDatumPolaska() {
         return datumPolaska;
     }
 
-    public Date getDatumDolaska() {
+    public LocalDate getDatumDolaska() {
         return datumDolaska;
     }
 
@@ -55,7 +56,7 @@ public class Aranzman {
         return smjestaj;
     }
 
-    public long getTrajanje() {
-        return (datumDolaska.getTime() - datumPolaska.getTime() / (1000 * 60 * 60)) % 365;
+    public int getTrajanje() {
+        return Period.between(datumPolaska, datumDolaska).getDays();
     }
 }
