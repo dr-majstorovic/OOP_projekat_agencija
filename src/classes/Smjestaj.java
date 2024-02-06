@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.ArrayList;
+
 public class Smjestaj {
 
     private int id;
@@ -7,6 +9,7 @@ public class Smjestaj {
     private int brojZvjezdica;
     private Soba vrstaSobe;
     private double cijenaPN;
+    public static ArrayList<Smjestaj> all;
 
     public Smjestaj(int id, String naziv, int brojZvjezdica, Soba vrstaSobe, double cijenaPN) {
         this.id = id;
@@ -14,6 +17,7 @@ public class Smjestaj {
         this.brojZvjezdica = brojZvjezdica;
         this.vrstaSobe = vrstaSobe;
         this.cijenaPN = cijenaPN;
+        all.add(this);
     }
 
     public int getId() {
