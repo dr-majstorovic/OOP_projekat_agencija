@@ -35,4 +35,12 @@ public class Korisnik {
     public String getLozinka() {
         return lozinka;
     }
+
+    public Korisnik getFromID(int id) {
+        for(Korisnik x: all){
+            if(x.getId() == id)
+                return x;
+        }
+        return null;
+    }
 }

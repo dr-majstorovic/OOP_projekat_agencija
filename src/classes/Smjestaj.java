@@ -39,4 +39,12 @@ public class Smjestaj {
     public double getCijenaPN() {
         return cijenaPN;
     }
+
+    public Smjestaj getFromID(int id) {
+        for(Smjestaj x: all){
+            if(x.getId() == id)
+                return x;
+        }
+        return null;
+    }
 }

@@ -2,6 +2,7 @@ package classes;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
 public class Aranzman {
 
@@ -12,6 +13,7 @@ public class Aranzman {
     private LocalDate datumPolaska, datumDolaska;
     private double cijena;
     private Smjestaj smjestaj;
+    public static ArrayList<Aranzman> all;
 
     public Aranzman(int id, String naziv, String destinacija, Prevoz prevoz, LocalDate datumPolaska, LocalDate datumDolaska, double cijena, Smjestaj smjestaj) {
         this.id = id;
@@ -22,6 +24,7 @@ public class Aranzman {
         this.datumDolaska = datumDolaska;
         this.cijena = cijena;
         this.smjestaj = smjestaj;
+        all.add(this);
     }
 
     public int getId() {
@@ -58,5 +61,13 @@ public class Aranzman {
 
     public int getTrajanje() {
         return Period.between(datumPolaska, datumDolaska).getDays();
+    }
+
+    public Aranzman getFromID(int id) {
+        for(Aranzman x: all){
+            if(x.getId() == id)
+                return x;
+        }
+        return null;
     }
 }

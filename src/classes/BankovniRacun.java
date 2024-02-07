@@ -26,4 +26,20 @@ public class BankovniRacun {
     public Double getStanje() {
         return stanje;
     }
+
+    public BankovniRacun getFromID(String br) {
+        for(BankovniRacun x: all){
+            if(x.getBrojRacuna().equals(br))
+                return x;
+        }
+        return null;
+    }
+
+    public BankovniRacun getFromJMBG(String br) {
+        for(BankovniRacun x: all){
+            if(x.getBrojRacuna().equals(br))
+                return x;
+        }
+        return null;
+    }
 }

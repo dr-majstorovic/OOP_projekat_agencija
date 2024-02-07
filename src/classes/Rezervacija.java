@@ -46,4 +46,12 @@ public class Rezervacija {
     public double getPlaceno() {
         return placeno;
     }
+
+    public Rezervacija getFromID(int id) {
+        for(Rezervacija x: all){
+            if(x.getId() == id)
+                return x;
+        }
+        return null;
+    }
 }
