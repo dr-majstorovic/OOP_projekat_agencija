@@ -63,7 +63,7 @@ public class Aranzman {
         return Period.between(datumPolaska, datumDolaska).getDays();
     }
 
-    public Aranzman getFromID(int id) {
+    public static Aranzman getFromID(int id) {
         for(Aranzman x: all){
             if(x.getId() == id)
                 return x;

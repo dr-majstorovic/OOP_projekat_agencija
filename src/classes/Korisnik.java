@@ -36,9 +36,9 @@ public class Korisnik {
         return lozinka;
     }
 
-    public Korisnik getFromID(int id) {
+    public static Korisnik getFromID(int id, String klasa) {
         for(Korisnik x: all){
-            if(x.getId() == id)
+            if(x.getId() == id && klasa.equals(x.getClass().getSimpleName()))
                 return x;
         }
         return null;

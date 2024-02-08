@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 public class Rezervacija {
 
-    private int id;
     private Klijent klijent;
     private Aranzman aranzman;
     private double ukupnaCijena, placeno;
     public static ArrayList<Rezervacija> all;
 
-    public Rezervacija(int id, Klijent klijent, Aranzman aranzman, double ukupnaCijena, double placeno) {
-        this.id = id;
+    public Rezervacija(Klijent klijent, Aranzman aranzman, double ukupnaCijena, double placeno) {
         this.klijent = klijent;
         this.aranzman = aranzman;
         this.ukupnaCijena = ukupnaCijena;
@@ -20,15 +18,11 @@ public class Rezervacija {
     }
 
     public Rezervacija(Klijent klijent, Aranzman aranzman, double placeno){
-        this(0, klijent, aranzman, racunajCijena(aranzman), placeno);
+        this(klijent, aranzman, racunajCijena(aranzman), placeno);
     }
 
     private static double racunajCijena(Aranzman aranzman){
         return aranzman.getCijena() + aranzman.getSmjestaj().getCijenaPN() * aranzman.getTrajanje();
-    }
-
-    public int getId() {
-        return id;
     }
 
     public Klijent getKlijent() {
@@ -47,11 +41,4 @@ public class Rezervacija {
         return placeno;
     }
 
-    public Rezervacija getFromID(int id) {
-        for(Rezervacija x: all){
-            if(x.getId() == id)
-                return x;
-        }
-        return null;
-    }
 }

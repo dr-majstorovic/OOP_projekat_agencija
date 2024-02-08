@@ -27,7 +27,7 @@ public class BankovniRacun {
         return stanje;
     }
 
-    public BankovniRacun getFromID(String br) {
+    public static BankovniRacun getFromID(String br) {
         for(BankovniRacun x: all){
             if(x.getBrojRacuna().equals(br))
                 return x;
@@ -35,7 +35,7 @@ public class BankovniRacun {
         return null;
     }
 
-    public BankovniRacun getFromJMBG(String br) {
+    public static BankovniRacun getFromJMBG(String br) {
         for(BankovniRacun x: all){
             if(x.getBrojRacuna().equals(br))
                 return x;

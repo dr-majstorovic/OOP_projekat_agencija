@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public class Read {
 
@@ -86,12 +87,38 @@ public class Read {
         }
     }
 
-    public static void readAranzman(Connection connection){
+    public static void readAranzman(Connection connection) throws SQLException{
+        String upit = "SELECT * FROM aranzman;";
+        Statement iskaz = connection.createStatement();
+        ResultSet rezultat = iskaz.executeQuery(upit);
 
+        while(rezultat.next()){
+            int id = rezultat.getInt("id");
+            String naziv = rezultat.getString("naziv_putovanja");
+            String destinacija = rezultat.getString("destinacija");
+            Prevoz prevoz = Prevoz.odOznake(rezultat.getString("prevoz"));
+            LocalDate dPolaska = rezultat.getDate("datum_polaska").toLocalDate();
+            LocalDate dDolaska = rezultat.getDate("datum_dolaska").toLocalDate();
+            double cijena = rezultat.getDouble("cijena_aranzmana");
+            Smjestaj smjestaj = Smjestaj.getFromID(rezultat.getInt("Smjestaj_id"));
+
+            new Aranzman(id, naziv, destinacija, prevoz, dPolaska, dDolaska, cijena, smjestaj);
+        }
     }
 
-    public static void readRezervacija(Connection connection){
+    public static void readRezervacija(Connection connection) throws SQLException {
+        String upit = "SELECT * FROM aranzman;";
+        Statement iskaz = connection.createStatement();
+        ResultSet rezultat = iskaz.executeQuery(upit);
 
+        while(rezultat.next()){
+            Klijent klijent = (Klijent)Korisnik.getFromID(rezultat.getInt("Klijent_id"), "Klijent");
+            Aranzman aranzman = Aranzman.getFromID(rezultat.getInt("Aranzman_id"));
+            double uCijena = rezultat.getDouble("ukupna_cijena");
+            double pCijena = rezultat.getDouble("placena_cijena");
+
+            new Rezervacija(klijent, aranzman, uCijena, pCijena);
+        }
     }
 
 

@@ -40,7 +40,7 @@ public class Smjestaj {
         return cijenaPN;
     }
 
-    public Smjestaj getFromID(int id) {
+    public static Smjestaj getFromID(int id) {
         for(Smjestaj x: all){
             if(x.getId() == id)
                 return x;
