@@ -7,7 +7,7 @@ public class Rezervacija {
     private Klijent klijent;
     private Aranzman aranzman;
     private double ukupnaCijena, placeno;
-    public static ArrayList<Rezervacija> all;
+    public static ArrayList<Rezervacija> all = new ArrayList<>();
 
     public Rezervacija(Klijent klijent, Aranzman aranzman, double ukupnaCijena, double placeno) {
         this.klijent = klijent;

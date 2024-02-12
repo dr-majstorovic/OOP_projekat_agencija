@@ -6,7 +6,7 @@ public class BankovniRacun {
 
     private String brojRacuna, JMBG;
     private Double stanje;
-    public static ArrayList<BankovniRacun> all;
+    public static ArrayList<BankovniRacun> all = new ArrayList<>();
 
     public BankovniRacun(String brojRacuna, String JMBG, Double stanje){
         this.brojRacuna = brojRacuna;

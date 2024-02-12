@@ -13,7 +13,7 @@ public class Aranzman {
     private LocalDate datumPolaska, datumDolaska;
     private double cijena;
     private Smjestaj smjestaj;
-    public static ArrayList<Aranzman> all;
+    public static ArrayList<Aranzman> all = new ArrayList<>();
 
     public Aranzman(int id, String naziv, String destinacija, Prevoz prevoz, LocalDate datumPolaska, LocalDate datumDolaska, double cijena, Smjestaj smjestaj) {
         this.id = id;

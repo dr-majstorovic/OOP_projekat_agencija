@@ -9,7 +9,7 @@ public class Smjestaj {
     private int brojZvjezdica;
     private Soba vrstaSobe;
     private double cijenaPN;
-    public static ArrayList<Smjestaj> all;
+    public static ArrayList<Smjestaj> all = new ArrayList<>();
 
     public Smjestaj(int id, String naziv, int brojZvjezdica, Soba vrstaSobe, double cijenaPN) {
         this.id = id;

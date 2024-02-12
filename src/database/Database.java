@@ -17,8 +17,7 @@ public class Database {
             connectionUrl = "jdbc:mysql://localhost" + ":" + port + "/" + DB_name;
             connection = DriverManager.getConnection(connectionUrl, DB_user, DB_password);
             System.out.println("Uspjesno ste se konektovali na bazu:" + connectionUrl);
-
-            connection.close();
+            Read.read(connection);
         } catch (SQLException e){
             e.printStackTrace();
         } //catch (ClassNotFoundException e) {

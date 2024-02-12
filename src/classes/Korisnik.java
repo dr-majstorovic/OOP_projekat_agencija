@@ -6,7 +6,7 @@ public class Korisnik {
 
     protected int id;
     protected String ime, prezime, korisnickoIme, lozinka;
-    public static ArrayList<Korisnik> all;
+    public static ArrayList<Korisnik> all = new ArrayList<>();
 
     public Korisnik(int id, String ime, String prezime, String korisnickoIme, String lozinka) {
         this.id = id;
