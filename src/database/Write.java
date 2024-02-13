@@ -1,9 +1,6 @@
 package database;
 
-import classes.Admin;
-import classes.Aranzman;
-import classes.Klijent;
-import classes.Korisnik;
+import classes.*;
 
 import java.sql.*;
 
@@ -55,11 +52,18 @@ public class Write {
     }
 
     public static void updateLozinka(Korisnik korisnik) throws SQLException{
-
         String tabela = (korisnik.getClass().getSimpleName().equals("Klijent")) ? "klijent" : "admin";
 
         String upit = "UPDATE " + tabela + " SET lozinka = '" + korisnik.getLozinka() + "' WHERE id = " + korisnik.getId();
         Statement iskaz = connection.createStatement();
         iskaz.executeUpdate(upit);
+    }
+
+    public static void writeRezervacija(Rezervacija rezervacija) throws SQLException{
+        String upit = "INSERT INTO rezervacija VALUES (" + rezervacija.getKlijent().getId() + ", " + rezervacija.getAranzman().getId() +
+                ", " + rezervacija.getUkupnaCijena() + ", " + rezervacija.getPlaceno() + ");";
+        Statement iskaz = connection.createStatement();
+        iskaz.executeUpdate(upit);
+
     }
 }

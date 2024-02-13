@@ -59,7 +59,6 @@ public class KlijentController {
 
     public void novaRezervacija(ActionEvent event){
 
-        Aplikacija.nazad.add(this.scene);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("klijent-rezervacija.fxml"));
         try {
             root = loader.load();
@@ -67,13 +66,29 @@ public class KlijentController {
             throw new RuntimeException(e);
         }
 
+        KlijentRezervacijaController krc = loader.getController();
+        krc.proslijedi(klijent);
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void pregledajRezervacije(){
+    public void pregledajRezervacije(ActionEvent event){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("klijent-pregled.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
+        KlijentRezervacijaController krc = loader.getController();
+        krc.proslijedi(klijent);
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

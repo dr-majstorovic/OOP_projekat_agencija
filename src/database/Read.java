@@ -12,9 +12,9 @@ public class Read {
     public static Connection connection;
 
     public static void read() throws SQLException{
+        readBankovniRacun();
         readAdmin();
         readKlijent();
-        readBankovniRacun();
         readSmjestaj();
         readAranzman();
         readRezervacija();
@@ -102,7 +102,9 @@ public class Read {
             LocalDate dPolaska = rezultat.getDate("datum_polaska").toLocalDate();
             LocalDate dDolaska = rezultat.getDate("datum_dolaska").toLocalDate();
             double cijena = rezultat.getDouble("cijena_aranzmana");
-            Smjestaj smjestaj = Smjestaj.getFromID(rezultat.getInt("Smjestaj_id"));
+            Smjestaj smjestaj = null;
+            if(!dPolaska.isEqual(dDolaska))
+                smjestaj = Smjestaj.getFromID(rezultat.getInt("Smjestaj_id"));
 
             new Aranzman(id, naziv, destinacija, prevoz, dPolaska, dDolaska, cijena, smjestaj);
         }

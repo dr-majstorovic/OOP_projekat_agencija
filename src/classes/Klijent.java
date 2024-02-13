@@ -10,6 +10,7 @@ public class Klijent extends Korisnik{
         this.JMBG = JMBG;
         this.brojRacuna = brojRacuna;
         Korisnik.all.add(this);
+
     }
 
     public String getBrojTelefona() {
@@ -23,4 +24,5 @@ public class Klijent extends Korisnik{
     public String getBrojRacuna() {
         return brojRacuna;
     }
+
 }
