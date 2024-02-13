@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,7 +39,7 @@ public class RegistracijaController {
                 brRacuna.getText().isEmpty() ||
                 username.getText().isEmpty()){
             porukaGreske += "Sva polja moraju biti popunjena. ";
-        }
+        }else{
         if (!(brTel.getText().matches("[0-9]+")))
             porukaGreske += "Nevažeći broj telefona. ";
         for(BankovniRacun br: BankovniRacun.all){
@@ -67,6 +66,11 @@ public class RegistracijaController {
 
         if(!pass1.getText().equals(pass2.getText())){
             porukaGreske += "Lozinke se ne podudaraju. ";
+        }
+
+        if(pass1.getText().length() < 6)
+            porukaGreske += "Lozinka mora imati bar 6 karaktera. ";
+
         }
 
         if(porukaGreske.isEmpty()){

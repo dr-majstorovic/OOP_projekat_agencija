@@ -20,13 +20,13 @@ public class Aplikacija extends Application{
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("aplikacija.fxml"));
             Scene scene = new Scene(root);
-            nazad.add(scene);
             stage.setScene(scene);
             stage.setTitle("GoTravel");
+            stage.setResizable(false);
             stage.show();
         }catch (Exception e){
             e.printStackTrace();

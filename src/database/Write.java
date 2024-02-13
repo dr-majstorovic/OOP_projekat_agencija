@@ -15,9 +15,9 @@ public class Write {
         String upit = "INSERT INTO klijent (ime, prezime, broj_telefona, jmbg, broj_racuna, korisnicko_ime, lozinka)" +
                 "VALUES ('" + klijent.getIme() + "', '" + klijent.getPrezime() + "', '" + klijent.getBrojTelefona() +
                 "', '" + klijent.getJMBG() + "', '" + klijent.getBrojRacuna() + "', '" + klijent.getKorisnickoIme() +
-                "', '" + klijent.getLozinka() + ");";
+                "', '" + klijent.getLozinka() + "');";
         Statement iskaz = connection.createStatement();
-        iskaz.execute(upit);
+        iskaz.executeUpdate(upit);
         upit = "SELECT MAX(id) FROM klijent;";
         ResultSet rezultat = iskaz.executeQuery(upit);
         int id = 0;
@@ -30,7 +30,7 @@ public class Write {
         String upit = "INSERT INTO admin (ime, prezime, korisnicko_ime, lozinka) VALUES ('" + admin.getIme() +
                 "', '" + admin.getPrezime() + "', '" + admin.getKorisnickoIme() + "', '" + admin.getLozinka() + "');";
         Statement iskaz = connection.createStatement();
-        iskaz.execute(upit);
+        iskaz.executeUpdate(upit);
         upit = "SELECT MAX(id) FROM admin;";
         ResultSet rezultat = iskaz.executeQuery(upit);
         int id = 0;
@@ -45,12 +45,21 @@ public class Write {
                 "', " + Date.valueOf(aranzman.getDatumPolaska()) + ", " + Date.valueOf(aranzman.getDatumDolaska()) +
                 ", " + aranzman.getCijena() + ", " + aranzman.getSmjestaj().getId() + ");";
         Statement iskaz = connection.createStatement();
-        iskaz.execute(upit);
+        iskaz.executeUpdate(upit);
         int id = 0;
         upit = "SELECT MAX(id) FROM aranzman;";
         ResultSet rezultat = iskaz.executeQuery(upit);
         if(rezultat.next())
             id = rezultat.getInt(1);
         aranzman.setId(id);
+    }
+
+    public static void updateLozinka(Korisnik korisnik) throws SQLException{
+
+        String tabela = (korisnik.getClass().getSimpleName().equals("Klijent")) ? "klijent" : "admin";
+
+        String upit = "UPDATE " + tabela + " SET lozinka = '" + korisnik.getLozinka() + "' WHERE id = " + korisnik.getId();
+        Statement iskaz = connection.createStatement();
+        iskaz.executeUpdate(upit);
     }
 }

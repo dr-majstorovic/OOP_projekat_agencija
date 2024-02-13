@@ -38,6 +38,8 @@ public class Korisnik {
 
     public void setId(int id) { this.id = id; }
 
+    public void setLozinka(String lozinka) { this.lozinka = lozinka; }
+
     public static Korisnik getFromID(int id, String klasa) {
         for(Korisnik x: all){
             if(x.getId() == id && klasa.equals(x.getClass().getSimpleName()))
