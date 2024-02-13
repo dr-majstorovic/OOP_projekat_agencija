@@ -3,6 +3,7 @@ package classes;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Aranzman {
 
@@ -14,6 +15,8 @@ public class Aranzman {
     private double cijena;
     private Smjestaj smjestaj;
     public static ArrayList<Aranzman> all = new ArrayList<>();
+    public static ArrayList<Aranzman> izleti = new ArrayList<>();
+    public static ArrayList<Aranzman> putovanja = new ArrayList<>();
 
     public Aranzman(int id, String naziv, String destinacija, Prevoz prevoz, LocalDate datumPolaska, LocalDate datumDolaska, double cijena, Smjestaj smjestaj) {
         this.id = id;
@@ -25,6 +28,11 @@ public class Aranzman {
         this.cijena = cijena;
         this.smjestaj = smjestaj;
         all.add(this);
+
+        if(this.datumPolaska.isEqual(this.datumDolaska))
+            izleti.add(this);
+        else
+            putovanja.add(this);
     }
 
     public int getId() {
@@ -72,4 +80,10 @@ public class Aranzman {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return naziv;
+    }
+
 }

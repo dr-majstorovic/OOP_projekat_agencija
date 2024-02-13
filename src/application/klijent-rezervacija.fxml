@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.KlijentRezervacijaController">
+   <children>
+      <AnchorPane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #88D7C9;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo_black.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="443.0" layoutY="18.0" text="Rezervacija">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="325.0" prefWidth="600.0" style="-fx-background-color: #D9F2E9;">
+         <children>
+            <ListView fx:id="listaAranzmana" layoutX="56.0" layoutY="45.0" prefHeight="217.0" prefWidth="235.0" />
+            <GridPane layoutX="300.0" layoutY="45.0" prefHeight="142.0" prefWidth="245.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Naziv:" />
+                  <Label text="Destinacija:" GridPane.rowIndex="1" />
+                  <Label text="Prevoz:" GridPane.rowIndex="2" />
+                  <Label text="Polazak:" GridPane.rowIndex="3" />
+                  <Label text="Povratak:" GridPane.rowIndex="4" />
+                  <Label text="Cijena:" GridPane.rowIndex="5" />
+                  <Label text="Smještaj:" GridPane.rowIndex="6" />
+                  <Label fx:id="labelNaziv" GridPane.columnIndex="1" />
+                  <Label fx:id="labelDestinacija" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="labelPrevoz" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="labelPolazak" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="labelDolazak" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="labelCijena" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="labelSmjestaj" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+               </children>
+            </GridPane>
+            <Button fx:id="dugmeIzleti" layoutX="56.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Izleti" onAction="#izborIzlet"/>
+            <Button fx:id="dugmePutovanja" layoutX="179.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Putovanja" onAction="#izborPutovanje"/>
+            <ImageView fx:id="naprijed" fitHeight="37.0" fitWidth="33.0" layoutX="549.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="nazad" fitHeight="37.0" fitWidth="33.0" layoutX="14.0" layoutY="7.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
+            <RadioButton fx:id="sortPolazak" layoutX="92.0" layoutY="294.0" mnemonicParsing="false" onAction="#sortPolazak" text="Po vremenu do polaska">
+               <toggleGroup>
+                  <ToggleGroup fx:id="sort" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="sortCijena" layoutX="92.0" layoutY="272.0" mnemonicParsing="false" onAction="#sortCijena" text="Po cijeni" toggleGroup="$sort" />
+            <Label layoutX="56.0" layoutY="272.0" text="Sort:" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

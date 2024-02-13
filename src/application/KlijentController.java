@@ -57,8 +57,20 @@ public class KlijentController {
         stage.show();
     }
 
-    public void novaRezervacija(){
+    public void novaRezervacija(ActionEvent event){
 
+        Aplikacija.nazad.add(this.scene);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("klijent-rezervacija.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void pregledajRezervacije(){

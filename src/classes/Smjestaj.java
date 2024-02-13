@@ -47,4 +47,9 @@ public class Smjestaj {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return naziv + ", zvjezdica: (" + brojZvjezdica + "), " + vrstaSobe + " soba";
+    }
 }
