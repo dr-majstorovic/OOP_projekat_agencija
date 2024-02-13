@@ -9,16 +9,18 @@ import java.time.LocalDate;
 
 public class Read {
 
-    public static void read(Connection connection) throws SQLException{
-        readAdmin(connection);
-        readKlijent(connection);
-        readBankovniRacun(connection);
-        readSmjestaj(connection);
-        readAranzman(connection);
-        readRezervacija(connection);
+    public static Connection connection;
+
+    public static void read() throws SQLException{
+        readAdmin();
+        readKlijent();
+        readBankovniRacun();
+        readSmjestaj();
+        readAranzman();
+        readRezervacija();
     }
 
-    public static void readAdmin(Connection connection) throws SQLException {
+    public static void readAdmin() throws SQLException {
 
         String upit = "SELECT * FROM admin;";
         Statement iskaz = connection.createStatement();
@@ -37,7 +39,7 @@ public class Read {
 
     }
 
-    public static void readKlijent(Connection connection) throws SQLException{
+    public static void readKlijent() throws SQLException{
         String upit = "SELECT * FROM klijent;";
         Statement iskaz = connection.createStatement();
         ResultSet rezultat = iskaz.executeQuery(upit);
@@ -57,7 +59,7 @@ public class Read {
 
     }
 
-    public static void readBankovniRacun(Connection connection) throws SQLException {
+    public static void readBankovniRacun() throws SQLException {
         String upit = "SELECT * FROM bankovni_racun;";
         Statement iskaz = connection.createStatement();
         ResultSet rezultat = iskaz.executeQuery(upit);
@@ -71,7 +73,7 @@ public class Read {
         }
     }
 
-    public static void readSmjestaj(Connection connection) throws SQLException {
+    public static void readSmjestaj() throws SQLException {
         String upit = "SELECT * FROM smjestaj;";
         Statement iskaz = connection.createStatement();
         ResultSet rezultat = iskaz.executeQuery(upit);
@@ -87,7 +89,7 @@ public class Read {
         }
     }
 
-    public static void readAranzman(Connection connection) throws SQLException{
+    public static void readAranzman() throws SQLException{
         String upit = "SELECT * FROM aranzman;";
         Statement iskaz = connection.createStatement();
         ResultSet rezultat = iskaz.executeQuery(upit);
@@ -106,7 +108,7 @@ public class Read {
         }
     }
 
-    public static void readRezervacija(Connection connection) throws SQLException {
+    public static void readRezervacija() throws SQLException {
         String upit = "SELECT * FROM aranzman;";
         Statement iskaz = connection.createStatement();
         ResultSet rezultat = iskaz.executeQuery(upit);

@@ -7,7 +7,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Aplikacija extends Application{
+
+    public static ArrayList<Scene> nazad = new ArrayList<>(), naprijed = new ArrayList<>();
 
     public static void main(String[] args) {
         Database.init();
@@ -20,6 +24,7 @@ public class Aplikacija extends Application{
         try{
             Parent root = FXMLLoader.load(getClass().getResource("aplikacija.fxml"));
             Scene scene = new Scene(root);
+            nazad.add(scene);
             stage.setScene(scene);
             stage.setTitle("GoTravel");
             stage.show();

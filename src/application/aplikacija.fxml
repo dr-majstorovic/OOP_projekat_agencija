@@ -29,7 +29,7 @@
             <Button layoutX="149.0" layoutY="232.0" mnemonicParsing="false" onAction="#dugmePrijava" prefHeight="25.0" prefWidth="99.0" text="Prijava" />
             <Line endX="100.0" layoutX="198.0" layoutY="279.0" startX="-100.0" />
             <Label layoutX="157.0" layoutY="292.0" text="Nemate nalog?" />
-            <Button layoutX="160.0" layoutY="309.0" mnemonicParsing="false" text="Registracija" />
+            <Button layoutX="160.0" layoutY="309.0" mnemonicParsing="false" text="Registracija" onAction="#dugmeRegistracija"/>
             <Label layoutX="81.0" layoutY="102.0" text="Dobro došli na GoTravel!">
                <font>
                   <Font name="System Bold" size="20.0" />
