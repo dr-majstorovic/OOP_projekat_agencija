@@ -78,7 +78,7 @@ public class RegistracijaController {
             try{
                 database.Write.writeKlijent(klijent);
                 AlertBox.display("Uspješno ste se registrovali.");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("aplikacija.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/aplikacija.fxml"));
                 root = loader.load();
 
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -100,7 +100,7 @@ public class RegistracijaController {
 
     public void pocetak(ActionEvent event){
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("aplikacija.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/aplikacija.fxml"));
         try {
             root = loader.load();
         } catch (IOException e) {

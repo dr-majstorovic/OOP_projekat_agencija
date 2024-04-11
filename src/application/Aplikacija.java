@@ -22,7 +22,7 @@ public class Aplikacija extends Application{
     @Override
     public void start(Stage stage){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("aplikacija.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../fxml/aplikacija.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("GoTravel");

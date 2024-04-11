@@ -65,7 +65,7 @@ public class PromjenaLozinkeController {
                 greskaLabel.setText("Greska u bazi podataka.");
             }
             AlertBox.display("Uspješno ste promijenili lozinku");
-            String fxml = korisnik.getClass().getSimpleName().toLowerCase() + ".fxml";
+            String fxml = "../fxml/" + korisnik.getClass().getSimpleName().toLowerCase() + ".fxml";
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             try {
                 root = loader.load();
@@ -94,7 +94,7 @@ public class PromjenaLozinkeController {
 
     public void nazad(ActionEvent event){
 
-        String fxml = korisnik.getClass().getSimpleName().toLowerCase() + ".fxml";
+        String fxml = "../fxml/" + korisnik.getClass().getSimpleName().toLowerCase() + ".fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         try {
             root = loader.load();
