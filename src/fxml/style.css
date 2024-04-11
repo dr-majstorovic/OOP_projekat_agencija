@@ -1,0 +1,73 @@
+.button {
+   -fx-border-width: 2px;
+   -fx-border-style: solid;
+   -fx-border-color: rgba(45, 134, 118, 1);
+   -fx-border-radius: 75px;
+   -fx-background-color: rgba(136, 215, 201, 0.5);
+   -fx-background-radius: 75px;
+}
+
+.button:hover {
+ -fx-color: #111;
+}
+
+.text-field {
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-radius: 75px;
+    -fx-background-color: white;
+    -fx-background-radius: 75px;
+}
+
+.choice-box {
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-radius: 75px;
+    -fx-background-color: rgb(198, 236, 229);
+    -fx-background-radius: 75px;
+}
+.combo-box {
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-radius: 75px;
+    -fx-background-color: rgb(198, 236, 229);
+    -fx-background-radius: 75px;
+}
+
+.date-picker {
+    -fx-border-width: 0px;
+    -fx-border-radius: 75px;
+    -fx-background-color: rgb(198, 236, 229);
+    -fx-background-radius: 75px;
+}
+
+.date-picker .arrow-button {
+    -fx-background-radius: 75px;
+    -fx-border-color: black;
+    -fx-border-radius: 75px;
+    -fx-background-color: rgb(198, 236, 229);
+}
+
+.date-picker .button {
+    -fx-border-width: 0px;
+    -fx-background-color: rgba(0,0,0,0.0);
+}
+
+.radio-button .radio {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 15px;
+    -fx-background-color: rgb(198, 236, 229);
+    -fx-background-image: null;
+}
+
+.list-view {
+    -fx-background-color: white;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(198, 236, 229);
+}
