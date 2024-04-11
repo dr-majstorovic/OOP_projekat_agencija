@@ -135,7 +135,7 @@ public class KlijentRezervacijaController implements Initializable {
                 return;
             }
             AlertBox.display("Rezervacija uspješna.");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("klijent.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/klijent.fxml"));
             try {
                 root = loader.load();
             } catch (IOException e) {
@@ -150,7 +150,7 @@ public class KlijentRezervacijaController implements Initializable {
     }
 
     public void nazad(ActionEvent event){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("klijent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/klijent.fxml"));
         try {
             root = loader.load();
         } catch (IOException e) {

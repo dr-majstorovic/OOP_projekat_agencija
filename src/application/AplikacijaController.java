@@ -34,7 +34,7 @@ public class AplikacijaController {
                 FXMLLoader loader = null;
 
                 if(k.getClass().getSimpleName().equals("Klijent")){
-                    loader = new FXMLLoader(getClass().getResource("klijent.fxml"));
+                    loader = new FXMLLoader(getClass().getResource("../fxml/klijent.fxml"));
                     try {
                         root = loader.load();
                     } catch (IOException e) {
@@ -43,7 +43,7 @@ public class AplikacijaController {
                     KlijentController klijentController = loader.getController();
                     klijentController.getKorisnik((Klijent)k);
                 }else{
-                    loader = new FXMLLoader(getClass().getResource("klijent.fxml"));
+                    loader = new FXMLLoader(getClass().getResource("../fxml/admin.fxml"));
                 }
 
 
@@ -59,7 +59,7 @@ public class AplikacijaController {
 
     public void dugmeRegistracija(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("registracija.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/registracija.fxml"));
         root = loader.load();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

@@ -30,7 +30,7 @@ public class KlijentController {
     }
 
     public void promjenaLozinke(ActionEvent event){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("promjena-lozinke.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/promjena-lozinke.fxml"));
         try {
             root = loader.load();
         } catch (IOException e) {
@@ -44,7 +44,7 @@ public class KlijentController {
     }
 
     public void odjava(ActionEvent event){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("aplikacija.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/aplikacija.fxml"));
         try {
             root = loader.load();
         } catch (IOException e) {
@@ -59,7 +59,7 @@ public class KlijentController {
 
     public void novaRezervacija(ActionEvent event){
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("klijent-rezervacija.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/klijent-rezervacija.fxml"));
         try {
             root = loader.load();
         } catch (IOException e) {
@@ -76,7 +76,7 @@ public class KlijentController {
     }
 
     public void pregledajRezervacije(ActionEvent event){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("klijent-pregled.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/klijent-pregled.fxml"));
         try {
             root = loader.load();
         } catch (IOException e) {
