@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.KlijentPregledController">
    <children>
       <AnchorPane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #88D7C9;">
          <children>
@@ -37,13 +36,13 @@
                   </ImageView>
                </graphic>
             </Button>
-            <ListView fx:id="listaRezervacija" layoutX="51.0" layoutY="51.0" prefHeight="237.0" prefWidth="200.0" />
+            <ListView fx:id="listaRezervacija" layoutX="51.0" layoutY="51.0" prefHeight="237.0" prefWidth="217.0" />
             <Button fx:id="dugmeAktivne" layoutX="51.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Aktivne" />
-            <Button fx:id="dugmeProtekle" layoutX="121.0" layoutY="15.0" mnemonicParsing="false" text="Protekle" />
-            <Button fx:id="dugmeOtkazane" layoutX="185.0" layoutY="15.0" mnemonicParsing="false" text="Otkazane" />
-            <Label layoutX="263.0" layoutY="19.0" text="Ukupno potrošeno novca:" />
+            <Button fx:id="dugmeProtekle" layoutX="125.0" layoutY="15.0" mnemonicParsing="false" text="Protekle" />
+            <Button fx:id="dugmeOtkazane" layoutX="197.0" layoutY="15.0" mnemonicParsing="false" text="Otkazane" />
+            <Label layoutX="286.0" layoutY="19.0" text="Ukupno potrošeno novca:" />
             <Label fx:id="potrosenoLabel" layoutX="412.0" layoutY="19.0" />
-            <Label layoutX="263.0" layoutY="43.0" text="Trebate još doplatiti:" />
+            <Label layoutX="286.0" layoutY="43.0" text="Trebate još doplatiti:" />
             <Label fx:id="doplatitiLabel" layoutX="378.0" layoutY="43.0" />
          </children>
       </AnchorPane>

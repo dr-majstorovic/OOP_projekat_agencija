@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Locale;
 
 public class PromjenaLozinkeController {
 
@@ -23,7 +22,7 @@ public class PromjenaLozinkeController {
     Scene scene;
     Stage stage;
 
-    public static Korisnik korisnik;
+    public Korisnik korisnik;
 
     @FXML
     PasswordField trenutna, nova1, nova2;
@@ -75,10 +74,10 @@ public class PromjenaLozinkeController {
 
             if(korisnik.getClass().getSimpleName().equals("Klijent")){
                 KlijentController klijentController = loader.getController();
-                klijentController.getKorisnik(KlijentController.klijent);
+                klijentController.setKorisnik(KlijentController.klijent);
             }else{
                 KlijentController klijentController = loader.getController();
-                klijentController.getKorisnik(KlijentController.klijent);
+                klijentController.setKorisnik(KlijentController.klijent);
             }
 
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -103,10 +102,10 @@ public class PromjenaLozinkeController {
         }
         if(korisnik.getClass().getSimpleName().equals("Klijent")){
             KlijentController klijentController = loader.getController();
-            klijentController.getKorisnik(KlijentController.klijent);
+            klijentController.setKorisnik(KlijentController.klijent);
         }else{
             KlijentController klijentController = loader.getController();
-            klijentController.getKorisnik(KlijentController.klijent);
+            klijentController.setKorisnik(KlijentController.klijent);
         }
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

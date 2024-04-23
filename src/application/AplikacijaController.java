@@ -41,7 +41,7 @@ public class AplikacijaController {
                         throw new RuntimeException(e);
                     }
                     KlijentController klijentController = loader.getController();
-                    klijentController.getKorisnik((Klijent)k);
+                    klijentController.setKorisnik((Klijent)k);
                 }else{
                     loader = new FXMLLoader(getClass().getResource("../fxml/admin.fxml"));
                 }

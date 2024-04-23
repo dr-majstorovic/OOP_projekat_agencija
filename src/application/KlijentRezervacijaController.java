@@ -81,7 +81,7 @@ public class KlijentRezervacijaController implements Initializable {
 
     }
 
-    public void proslijedi(Klijent k){
+    public void setKlijent(Klijent k){
         klijent = k;
     }
 
@@ -157,6 +157,8 @@ public class KlijentRezervacijaController implements Initializable {
             throw new RuntimeException(e);
         }
 
+        KlijentController KC = loader.getController();
+        KC.setKorisnik(klijent);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -171,14 +173,25 @@ public class KlijentRezervacijaController implements Initializable {
         else
             spisak = Aranzman.putovanja;
 
-        boolean brz = false, des = false, cl, ch, vs = false, p = false, dl = false, dh = false;
+        // PROMJENLJIVE ZA INDIKACIJU DA LI SE NEKI FILTER RAZMATRA ILI NE
+        boolean brz = false; // broj zvjezdica smjestaja
+        boolean des = false; // destinacija
+        boolean cl; // minimalna cijena (cijena low)
+        boolean ch; // maksimalna cijena (cijena high)
+        boolean vs = false; // vrsta smještaja
+        boolean p = false; // vrsta prevoza
+        boolean dl = false; // minimalni datum (datum low)
+        boolean dh = false; // maksimalni datum (datum high)
 
+        // PROMJENLJIVE SA ZAHTIJEVANIM VRIJEDNOSTIMA FILTERA
         Integer brZ = brZvjezdica.getValue();
         if(brZ != null)
             brz = true;
-        String dest = "" + destinacija.getSelectionModel().getSelectedItem();
+
+        String dest = destinacija.getSelectionModel().getSelectedItem();
         if(!dest.isEmpty())
             des = true;
+
         Double cL = null;
         try{
             cL = Double.parseDouble(cijenaLow.getText());
@@ -186,6 +199,7 @@ public class KlijentRezervacijaController implements Initializable {
         }catch (NumberFormatException nfe){
             cl = false;
         }
+
         Double cH = null;
         try{
             cH = Double.parseDouble(cijenaHigh.getText());

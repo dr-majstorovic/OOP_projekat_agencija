@@ -1,6 +1,7 @@
 package application;
 
 import classes.Klijent;
+import classes.Korisnik;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +23,7 @@ public class KlijentController {
     @FXML
     Label ime, prezime, username;
 
-    public void getKorisnik(Klijent k){
+    public void setKorisnik(Klijent k){
         klijent = k;
         ime.setText(k.getIme());
         prezime.setText(k.getPrezime());
@@ -36,6 +37,8 @@ public class KlijentController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        PromjenaLozinkeController PLC = loader.getController();
+        PLC.setKorisnik(klijent);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -67,7 +70,7 @@ public class KlijentController {
         }
 
         KlijentRezervacijaController krc = loader.getController();
-        krc.proslijedi(klijent);
+        krc.setKlijent(klijent);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -83,8 +86,8 @@ public class KlijentController {
             throw new RuntimeException(e);
         }
 
-        KlijentRezervacijaController krc = loader.getController();
-        krc.proslijedi(klijent);
+        KlijentPregledController kpc = loader.getController();
+        kpc.setKlijent(klijent);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

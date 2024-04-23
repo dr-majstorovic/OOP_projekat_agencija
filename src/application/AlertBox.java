@@ -16,6 +16,7 @@ public class AlertBox {
         window.setMinWidth(250);
         window.setMinHeight(150);
 
+
         Label poruka = new Label();
         poruka.setText(message);
 
