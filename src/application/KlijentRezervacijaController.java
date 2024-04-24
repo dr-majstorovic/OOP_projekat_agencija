@@ -39,13 +39,15 @@ public class KlijentRezervacijaController implements Initializable {
     ChoiceBox<Prevoz> prevoz;
     @FXML
     DatePicker dateLow, dateHigh;
+    @FXML
+    PasswordField lozinka;
 
     Parent root;
     Stage stage;
     Scene scene;
 
     public Klijent klijent;
-    Aranzman izabraniAranzman;
+    Aranzman izabraniAranzman = null;
 
     int ivp = 1; // izlet vs putovanje -> i = 1, p = 2;
 
@@ -105,7 +107,7 @@ public class KlijentRezervacijaController implements Initializable {
             listaAranzmana.getItems().addAll(Aranzman.izleti);
         }else{
             Aranzman.putovanja.sort(komparator);
-            listaAranzmana.getItems().addAll(Aranzman.izleti);
+            listaAranzmana.getItems().addAll(Aranzman.putovanja);
         }
     }
 
@@ -122,6 +124,18 @@ public class KlijentRezervacijaController implements Initializable {
     }
 
     public void rezervisi(ActionEvent event){
+        if(lozinka.getText().isEmpty()){
+            greska.setText("Unesite lozinku.");
+            return;
+        }
+        if(!lozinka.getText().equals(klijent.getLozinka())){
+            greska.setText("Pogrešna lozinka.");
+            return;
+        }
+        if(izabraniAranzman == null){
+            greska.setText("Prvo izaberite aranžman.");
+            return;
+        }
         if(BankovniRacun.getFromJMBG(klijent.getJMBG()).getStanje() < izabraniAranzman.getCijena()/2){
             greska.setText("Nemate dovljno novca na računu.");
         }else{
