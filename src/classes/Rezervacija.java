@@ -7,18 +7,20 @@ public class Rezervacija {
     private Klijent klijent;
     private Aranzman aranzman;
     private double ukupnaCijena, placeno;
+    private String otkazana;
     public static ArrayList<Rezervacija> all = new ArrayList<>();
 
-    public Rezervacija(Klijent klijent, Aranzman aranzman, double ukupnaCijena, double placeno) {
+    public Rezervacija(Klijent klijent, Aranzman aranzman, double ukupnaCijena, double placeno, String otkazana) {
         this.klijent = klijent;
         this.aranzman = aranzman;
         this.ukupnaCijena = ukupnaCijena;
         this.placeno = placeno;
+        this.otkazana = otkazana;
         all.add(this);
     }
 
-    public Rezervacija(Klijent klijent, Aranzman aranzman, double placeno){
-        this(klijent, aranzman, racunajCijena(aranzman), placeno);
+    public Rezervacija(Klijent klijent, Aranzman aranzman, double placeno, String otkazana){
+        this(klijent, aranzman, racunajCijena(aranzman), placeno, otkazana);
     }
 
     private static double racunajCijena(Aranzman aranzman){
@@ -41,4 +43,5 @@ public class Rezervacija {
         return placeno;
     }
 
+    public String getOtkazana() { return otkazana; }
 }

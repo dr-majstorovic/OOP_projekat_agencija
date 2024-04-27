@@ -61,7 +61,7 @@ public class Write {
 
     public static void writeRezervacija(Rezervacija rezervacija) throws SQLException{
         String upit = "INSERT INTO rezervacija VALUES (" + rezervacija.getKlijent().getId() + ", " + rezervacija.getAranzman().getId() +
-                ", " + rezervacija.getUkupnaCijena() + ", " + rezervacija.getPlaceno() + ");";
+                ", " + rezervacija.getUkupnaCijena() + ", " + rezervacija.getPlaceno() + ", " + rezervacija.getOtkazana() + ");";
         Statement iskaz = connection.createStatement();
         iskaz.executeUpdate(upit);
 

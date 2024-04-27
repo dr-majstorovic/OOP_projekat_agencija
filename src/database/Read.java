@@ -120,8 +120,9 @@ public class Read {
             Aranzman aranzman = Aranzman.getFromID(rezultat.getInt("Aranzman_id"));
             double uCijena = rezultat.getDouble("ukupna_cijena");
             double pCijena = rezultat.getDouble("placena_cijena");
+            String otkazana = rezultat.getString("otkazana");
 
-            new Rezervacija(klijent, aranzman, uCijena, pCijena);
+            new Rezervacija(klijent, aranzman, uCijena, pCijena, otkazana);
         }
     }
 
