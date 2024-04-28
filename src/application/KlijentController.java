@@ -2,9 +2,11 @@ package application;
 
 import classes.Klijent;
 import classes.Korisnik;
+import classes.Rezervacija;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,8 +14,13 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class KlijentController {
+public class KlijentController implements Initializable {
 
     public static Klijent klijent;
     Parent root;
@@ -21,13 +28,27 @@ public class KlijentController {
     Stage stage;
 
     @FXML
-    Label ime, prezime, username;
+    Label ime, prezime, username, obavjestenje1, obavjestenje2;
 
     public void setKorisnik(Klijent k){
         klijent = k;
-        ime.setText(k.getIme());
-        prezime.setText(k.getPrezime());
-        username.setText(k.getKorisnickoIme());
+        ime.setText(klijent.getIme());
+        prezime.setText(klijent.getPrezime());
+        username.setText(klijent.getKorisnickoIme());
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        obavjestenje1.setVisible(false);
+        obavjestenje2.setVisible(false);
+
+        for(Rezervacija r: Rezervacija.all){
+            if(r.getKlijent().equals(klijent) && r.getOtkazana().equals("ne") && r.getAranzman().getDatumPolaska().isBefore(LocalDate.now().plusDays(17))){
+                obavjestenje1.setVisible(true);
+                break;
+            }
+        }
     }
 
     public void promjenaLozinke(ActionEvent event){
@@ -94,4 +115,5 @@ public class KlijentController {
         stage.setScene(scene);
         stage.show();
     }
+
 }

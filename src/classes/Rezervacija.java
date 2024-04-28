@@ -1,5 +1,6 @@
 package classes;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Rezervacija {
@@ -44,4 +45,16 @@ public class Rezervacija {
     }
 
     public String getOtkazana() { return otkazana; }
+
+    public void setOtkazana(String otkazana) { this.otkazana = otkazana; }
+
+    public void setPlaceno(double placeno) { this.placeno = placeno; }
+
+    @Override
+    public String toString() {
+        if(LocalDate.now().isAfter(aranzman.getDatumPolaska().minusDays(3)))
+            return "* " + aranzman;
+        else
+            return aranzman.toString();
+    }
 }

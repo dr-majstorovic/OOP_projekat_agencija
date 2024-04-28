@@ -48,6 +48,8 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Label fx:id="obavjestenje1" layoutX="14.0" layoutY="308.0" prefHeight="36.0" prefWidth="343.0" text="Obavještenje: imate rezervacije do čijeg je polaska ostalo manje od 3 dana." wrapText="true" />
+            <Label fx:id="obavjestenje2" layoutX="14.0" layoutY="344.0" prefHeight="36.0" prefWidth="343.0" text="Obavještenje: neke rezervacije su otkazane od strane agencije. sav novac vam je vraćen." wrapText="true" />
          </children>
       </AnchorPane>
    </children>

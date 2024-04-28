@@ -29,7 +29,7 @@ public class BankovniRacun {
 
     public void  setStanje(Double stanje) { this.stanje = stanje; }
 
-    public static BankovniRacun getFromID(String br) {
+    public static BankovniRacun getFromBrojRacuna(String br) {
         for(BankovniRacun x: all){
             if(x.getBrojRacuna().equals(br))
                 return x;

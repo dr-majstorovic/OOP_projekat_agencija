@@ -47,29 +47,29 @@ public class KlijentRezervacijaController implements Initializable {
     Scene scene;
 
     public Klijent klijent;
+    ArrayList<Aranzman> aranzmani;
     Aranzman izabraniAranzman = null;
 
     int ivp = 1; // izlet vs putovanje -> i = 1, p = 2;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        listaAranzmana.getItems().addAll(Aranzman.all);
-        listaAranzmana.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Aranzman>() {
-            @Override
-            public void changed(ObservableValue<? extends Aranzman> observableValue, Aranzman aranzman, Aranzman t1) {
-                izabraniAranzman = listaAranzmana.getSelectionModel().getSelectedItem();
-                greska.setText("");
-                labelNaziv.setText(izabraniAranzman.getNaziv());
-                labelDestinacija.setText(izabraniAranzman.getDestinacija());
-                labelPrevoz.setText(izabraniAranzman.getPrevoz().toString());
-                labelPolazak.setText(izabraniAranzman.getDatumPolaska().toString());
-                labelDolazak.setText(izabraniAranzman.getDatumDolaska().toString());
-                labelCijena.setText(""+izabraniAranzman.getCijena());
-                if(izabraniAranzman.getSmjestaj().equals(null))
-                    labelSmjestaj.setText(izabraniAranzman.getSmjestaj().toString());
-                else
-                    labelSmjestaj.setText("N/A");
-            }
+        aktivniAranzmani();
+        if(aranzmani != null)
+            listaAranzmana.getItems().addAll(aranzmani);
+        listaAranzmana.getSelectionModel().selectedItemProperty().addListener((observableValue, aranzman, t1) -> {
+            izabraniAranzman = listaAranzmana.getSelectionModel().getSelectedItem();
+            greska.setText("");
+            labelNaziv.setText(izabraniAranzman.getNaziv());
+            labelDestinacija.setText(izabraniAranzman.getDestinacija());
+            labelPrevoz.setText(izabraniAranzman.getPrevoz().toString());
+            labelPolazak.setText(izabraniAranzman.getDatumPolaska().toString());
+            labelDolazak.setText(izabraniAranzman.getDatumDolaska().toString());
+            labelCijena.setText(""+izabraniAranzman.getCijena());
+            if(izabraniAranzman.getSmjestaj() != null)
+                labelSmjestaj.setText(izabraniAranzman.getSmjestaj().toString());
+            else
+                labelSmjestaj.setText("N/A");
         });
 
         brZvjezdica.getItems().addAll(1, 2, 3, 4, 5);
@@ -85,6 +85,13 @@ public class KlijentRezervacijaController implements Initializable {
 
     public void setKlijent(Klijent k){
         klijent = k;
+    }
+
+    // obezbjeđuje da je aranžman aktivan i da klijent ima vremena da uplati potreban iznos
+    public void aktivniAranzmani(){
+        for(Aranzman a: Aranzman.all)
+            if(a.getDatumPolaska().isAfter(LocalDate.now().plusWeeks(2)))
+                aranzmani.add(a);
     }
 
     public void izborIzlet(ActionEvent event){
@@ -139,7 +146,7 @@ public class KlijentRezervacijaController implements Initializable {
         if(BankovniRacun.getFromJMBG(klijent.getJMBG()).getStanje() < izabraniAranzman.getCijena()/2){
             greska.setText("Nemate dovljno novca na računu.");
         }else{
-            Rezervacija rezervacija = new Rezervacija(klijent, izabraniAranzman, izabraniAranzman.getCijena()/2);
+            Rezervacija rezervacija = new Rezervacija(klijent, izabraniAranzman, izabraniAranzman.getCijena()/2, "ne");
             BankovniRacun agencija = BankovniRacun.getFromJMBG("1102541293");
             agencija.setStanje(agencija.getStanje() + izabraniAranzman.getCijena()/2);
             try {
@@ -203,7 +210,7 @@ public class KlijentRezervacijaController implements Initializable {
             brz = true;
 
         String dest = destinacija.getSelectionModel().getSelectedItem();
-        if(!dest.isEmpty())
+        if(dest != null)
             des = true;
 
         Double cL = null;
