@@ -31,7 +31,7 @@
             <PasswordField fx:id="nova1" layoutX="226.0" layoutY="83.0" promptText="Nova lozinka" />
             <PasswordField fx:id="nova2" layoutX="226.0" layoutY="126.0" promptText="Potvrda nove lozinke" />
             <Button layoutX="226.0" layoutY="169.0" mnemonicParsing="false" onAction="#potvrdi" prefHeight="25.0" prefWidth="149.0" text="Potvrdi" />
-            <Button layoutX="226.0" layoutY="204.0" mnemonicParsing="false" onAction="#nazad" prefHeight="25.0" prefWidth="149.0" text="Odustani" />
+            <Button fx:id="nazad" layoutX="226.0" layoutY="204.0" mnemonicParsing="false" onAction="#nazad" prefHeight="25.0" prefWidth="149.0" text="Odustani" />
             <Label fx:id="greskaLabel" layoutX="226.0" layoutY="237.0" prefHeight="74.0" prefWidth="149.0" textFill="RED" wrapText="true" />
          </children>
       </AnchorPane>

@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdminController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #88D7C9;">
          <children>
@@ -41,7 +40,7 @@
          <children>
             <Label layoutX="14.0" layoutY="20.0" text="Broj admina:" />
             <Label fx:id="brAdmina" layoutX="89.0" layoutY="20.0" text="#" />
-            <Button fx:id="noviAdmin" layoutX="146.0" layoutY="14.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="184.0" text="Dodaj admina" />
+            <Button fx:id="noviAdmin" layoutX="146.0" layoutY="14.0" mnemonicParsing="false" onAction="#noviAdmin" prefHeight="29.0" prefWidth="184.0" text="Dodaj admina" />
          </children>
       </AnchorPane>
    </children>

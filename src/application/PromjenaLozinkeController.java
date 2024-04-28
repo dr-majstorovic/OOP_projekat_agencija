@@ -1,5 +1,6 @@
 package application;
 
+import classes.Admin;
 import classes.Klijent;
 import classes.Korisnik;
 import database.Write;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
@@ -23,24 +25,29 @@ public class PromjenaLozinkeController {
     Stage stage;
 
     public Korisnik korisnik;
+    private String lozinka;
 
     @FXML
     PasswordField trenutna, nova1, nova2;
     @FXML
     Label greskaLabel;
+    @FXML
+    Button nazad;
 
     public void setKorisnik(Korisnik k){
         korisnik = k;
+        if(korisnik.getLozinka().equals("12345678"))
+            nazad.setVisible(false);
     }
 
     public void potvrdi(ActionEvent event){
-        String trentutnaS = trenutna.getText();
+        String trenutnaS = trenutna.getText();
         String nova1S = nova1.getText();
         String nova2S = nova2.getText();
         greskaLabel.setText("");
         String greska = "";
 
-        if(!trentutnaS.equals(korisnik.getLozinka())){
+        if(!trenutnaS.equals(korisnik.getLozinka())){
             greska += "Neispravna lozinka. ";
         }
         if(!nova1S.equals(nova2S)){
@@ -74,10 +81,10 @@ public class PromjenaLozinkeController {
 
             if(korisnik.getClass().getSimpleName().equals("Klijent")){
                 KlijentController klijentController = loader.getController();
-                klijentController.setKorisnik(KlijentController.klijent);
+                klijentController.setKorisnik((Klijent) korisnik);
             }else{
-                KlijentController klijentController = loader.getController();
-                klijentController.setKorisnik(KlijentController.klijent);
+                AdminController adminController = loader.getController();
+                adminController.setKorisnik((Admin) korisnik);
             }
 
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -102,10 +109,10 @@ public class PromjenaLozinkeController {
         }
         if(korisnik.getClass().getSimpleName().equals("Klijent")){
             KlijentController klijentController = loader.getController();
-            klijentController.setKorisnik(KlijentController.klijent);
+            klijentController.setKorisnik((Klijent) korisnik);
         }else{
-            KlijentController klijentController = loader.getController();
-            klijentController.setKorisnik(KlijentController.klijent);
+            AdminController adminController = loader.getController();
+            adminController.setKorisnik((Admin) korisnik);
         }
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

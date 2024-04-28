@@ -1,5 +1,6 @@
 package application;
 
+import classes.Admin;
 import classes.Klijent;
 import classes.Korisnik;
 import javafx.event.ActionEvent;
@@ -41,9 +42,27 @@ public class AplikacijaController {
                         throw new RuntimeException(e);
                     }
                     KlijentController klijentController = loader.getController();
-                    klijentController.setKorisnik((Klijent)k);
+                    klijentController.setKorisnik((Klijent) k);
                 }else{
-                    loader = new FXMLLoader(getClass().getResource("../fxml/admin.fxml"));
+                    if(k.getLozinka().equals("12345678")){
+                        loader = new FXMLLoader(getClass().getResource("../fxml/promjena-lozinke.fxml"));
+                        try {
+                            root = loader.load();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        PromjenaLozinkeController PLC = loader.getController();
+                        PLC.setKorisnik(k);
+                    }else{
+                        loader = new FXMLLoader(getClass().getResource("../fxml/admin.fxml"));
+                        try {
+                            root = loader.load();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        AdminController adminController = loader.getController();
+                        adminController.setKorisnik((Admin) k);
+                    }
                 }
 
 
