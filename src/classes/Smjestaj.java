@@ -52,4 +52,8 @@ public class Smjestaj {
     public String toString() {
         return naziv + ", zvjezdica: (" + brojZvjezdica + "), " + vrstaSobe + " soba";
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

@@ -40,7 +40,12 @@ public class Write {
         String upit = "INSERT INTO aranzman (naziv_putovanja, destinacija, prevoz, datum_polaska, datum_dolaska, cijena_aranzmana, smjestaj_id) " +
                 "VALUES ('" + aranzman.getNaziv() + "', '" + aranzman.getDestinacija() + "', '" + aranzman.getPrevoz().name() +
                 "', " + Date.valueOf(aranzman.getDatumPolaska()) + ", " + Date.valueOf(aranzman.getDatumDolaska()) +
-                ", " + aranzman.getCijena() + ", " + aranzman.getSmjestaj().getId() + ");";
+                ", " + aranzman.getCijena() + ", ";
+        if(aranzman.getSmjestaj() == null){
+            upit += "NULL);";
+        }else {
+            upit += aranzman.getSmjestaj().getId() + ");";
+        }
         Statement iskaz = connection.createStatement();
         iskaz.executeUpdate(upit);
         int id = 0;
@@ -49,6 +54,19 @@ public class Write {
         if(rezultat.next())
             id = rezultat.getInt(1);
         aranzman.setId(id);
+    }
+
+    public static void writeSmjestaj(Smjestaj smjestaj) throws SQLException{
+        String upit = "INSERT INTO smjestaj (naziv, broj_zvjezdica, vrsta_sobe, cijena_po_nocenju) VALUES ('" +
+                smjestaj.getNaziv() + "', " + smjestaj.getBrojZvjezdica() + ", '" + smjestaj.getVrstaSobe() + "', " + smjestaj.getCijenaPN() + ");";
+        Statement iskaz = connection.createStatement();
+        iskaz.executeUpdate(upit);
+        int id = 0;
+        upit = "SELECT MAX(id) FROM smjestaj;";
+        ResultSet rezultat = iskaz.executeQuery(upit);
+        if(rezultat.next())
+            id = rezultat.getInt(1);
+        smjestaj.setId(id);
     }
 
     public static void updateLozinka(Korisnik korisnik) throws SQLException{

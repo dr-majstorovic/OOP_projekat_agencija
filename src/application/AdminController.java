@@ -64,6 +64,22 @@ public class AdminController implements Initializable {
         stage.show();
     }
 
+    public void noviAranzman(ActionEvent event){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/admin-aranzman.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminAranzmanController aac = loader.getController();
+        aac.setAdmin(admin);
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void noviAdmin(ActionEvent event){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/novi-admin.fxml"));
         try {

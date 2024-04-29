@@ -41,7 +41,12 @@
             <Label layoutX="14.0" layoutY="20.0" text="Broj admina:" />
             <Label fx:id="brAdmina" layoutX="89.0" layoutY="20.0" text="#" />
             <Button fx:id="noviAdmin" layoutX="146.0" layoutY="14.0" mnemonicParsing="false" onAction="#noviAdmin" prefHeight="29.0" prefWidth="184.0" text="Dodaj admina" />
-            <Button layoutX="105.0" layoutY="119.0" mnemonicParsing="false" onAction="#pregledajRezervacije" text="Pregledaj rezervacije">
+            <Button layoutX="105.0" layoutY="149.0" mnemonicParsing="false" onAction="#pregledajRezervacije" text="Pregledaj rezervacije">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="105.0" layoutY="209.0" mnemonicParsing="false" onAction="#noviAranzman" prefHeight="43.0" prefWidth="191.0" text="Novi aranžman">
                <font>
                   <Font size="18.0" />
                </font>
