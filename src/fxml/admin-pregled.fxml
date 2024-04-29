@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdminPregledController">
+   <children>
+      <AnchorPane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #88D7C9;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../media/logo_black.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="515.0" layoutY="18.0" text="Rezervacije">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: #D9F2E9;">
+         <children>
+            <Button fx:id="nazad" alignment="CENTER" layoutY="6.0" mnemonicParsing="false" onAction="#nazad" style="-fx-background-color: #D9F2E9; -fx-border-color: #D9F2E9;">
+               <graphic>
+                  <ImageView fitHeight="37.0" fitWidth="33.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../media/arrow.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label fx:id="potrosenoLabel" layoutX="509.0" layoutY="15.0" prefHeight="17.0" prefWidth="80.0" />
+            <Label fx:id="doplatitiLabel" layoutX="479.0" layoutY="37.0" prefHeight="17.0" prefWidth="92.0" />
+            <GridPane layoutX="232.0" layoutY="46.0" prefHeight="206.0" prefWidth="235.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="72.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="163.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Naziv:" />
+                  <Label text="Destinacija:" GridPane.rowIndex="1" />
+                  <Label text="Prevoz:" GridPane.rowIndex="2" />
+                  <Label text="Polazak:" GridPane.rowIndex="3" />
+                  <Label text="Povratak:" GridPane.rowIndex="4" />
+                  <Label text="Cijena:" GridPane.rowIndex="5" />
+                  <Label text="Smještaj:" GridPane.rowIndex="6" />
+                  <Label fx:id="labelNaziv" GridPane.columnIndex="1" />
+                  <Label fx:id="labelDestinacija" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="labelPrevoz" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="labelPolazak" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="labelDolazak" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="labelCijena" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="labelSmjestaj" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+               </children>
+            </GridPane>
+            <Button fx:id="obrisiButton" layoutX="478.0" layoutY="14.0" mnemonicParsing="false" onAction="#obrisiAranzman" prefHeight="29.0" prefWidth="143.0" text="Obriši aranžman" />
+            <Label layoutX="25.0" layoutY="219.0" text="Ukupna zarada:" />
+            <Label layoutX="25.0" layoutY="240.0" text="Klijenti duguju:" />
+            <Label fx:id="labelZarada" layoutX="121.0" layoutY="221.0" text="Label" />
+            <Label fx:id="labelDug" layoutX="121.0" layoutY="240.0" text="Label" />
+            <Line endX="549.0" layoutX="125.0" layoutY="263.0" startX="-100.0" />
+            <Pane fx:id="klijentiPane" layoutX="29.0" layoutY="279.0" prefHeight="219.0" prefWidth="643.0">
+               <children>
+                  <Label layoutX="226.0" layoutY="4.0" text="Klijenti koji imaju rezervaciju">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="232.0" layoutY="77.0" text="Ime i prezime:" />
+                  <Label fx:id="labelIme" layoutX="329.0" layoutY="77.0" text="Label" />
+                  <Label layoutX="265.0" layoutY="101.0" text="Uplatio:" />
+                  <Label layoutX="265.0" layoutY="125.0" text="Duguje:" />
+                  <Label layoutX="235.0" layoutY="149.0" text="Broj telefona:" />
+                  <Label fx:id="labelUplatio" layoutX="329.0" layoutY="101.0" text="Label" />
+                  <Label fx:id="labelDuguje" layoutX="329.0" layoutY="125.0" text="Label" />
+                  <Label fx:id="labelBrTel" layoutX="329.0" layoutY="149.0" text="Label" />
+                  <ChoiceBox fx:id="klijentiBox" layoutX="222.0" layoutY="34.0" prefHeight="27.0" prefWidth="190.0" />
+               </children>
+            </Pane>
+            <ChoiceBox fx:id="aranzmanBox" layoutX="232.0" layoutY="15.0" prefHeight="27.0" prefWidth="235.0" />
+            <Label layoutX="169.0" layoutY="20.0" text="Aranžman:" />
+            <Label fx:id="greska" alignment="TOP_LEFT" layoutX="481.0" layoutY="54.0" prefHeight="39.0" prefWidth="143.0" text="Label" textFill="RED" wrapText="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

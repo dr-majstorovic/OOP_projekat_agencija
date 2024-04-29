@@ -25,4 +25,8 @@ public class Klijent extends Korisnik{
         return brojRacuna;
     }
 
+    @Override
+    public String toString() {
+        return korisnickoIme;
+    }
 }

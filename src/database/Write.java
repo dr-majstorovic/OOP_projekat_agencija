@@ -76,4 +76,12 @@ public class Write {
         Statement iskaz = connection.createStatement();
         iskaz.executeUpdate(upit);
     }
+
+    public static void deleteAranzman(Aranzman aranzman) throws SQLException{
+        String upit = "DELETE FROM rezervacija WHERE Aranzman_id = " + aranzman.getId() + ";\n" +
+                "DELETE FROM aranzman WHERE id = " + aranzman.getId() + ";";
+
+        Statement iskaz = connection.createStatement();
+        iskaz.executeUpdate(upit);
+    }
 }

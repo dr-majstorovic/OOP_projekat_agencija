@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
 
-    public static Admin admin;
+    public Admin admin;
     Parent root;
     Scene scene;
     Stage stage;
@@ -46,6 +46,22 @@ public class AdminController implements Initializable {
                 n++;
         }
         return n;
+    }
+
+    public void pregledajRezervacije(ActionEvent event){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/admin-pregled.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminPregledController apc = loader.getController();
+        apc.setAdmin(admin);
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void noviAdmin(ActionEvent event){

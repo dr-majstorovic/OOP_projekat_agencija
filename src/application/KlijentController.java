@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class KlijentController implements Initializable {
 
-    public static Klijent klijent;
+    public Klijent klijent;
     Parent root;
     Scene scene;
     Stage stage;
