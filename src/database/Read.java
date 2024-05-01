@@ -83,7 +83,7 @@ public class Read {
             String naziv = rezultat.getString("naziv");
             int zvjezdica = rezultat.getInt("broj_zvjezdica");
             classes.Soba vrsta = Soba.odOznake(rezultat.getString("vrsta_sobe"));
-            double cijenapn = rezultat.getDouble("cijena_po_nocenju");
+            double cijenapn = rezultat.getDouble("cjena_po_nocenju");
 
             new Smjestaj(id, naziv, zvjezdica, vrsta, cijenapn);
         }
@@ -111,7 +111,7 @@ public class Read {
     }
 
     public static void readRezervacija() throws SQLException {
-        String upit = "SELECT * FROM aranzman;";
+        String upit = "SELECT * FROM rezervacija;";
         Statement iskaz = connection.createStatement();
         ResultSet rezultat = iskaz.executeQuery(upit);
 

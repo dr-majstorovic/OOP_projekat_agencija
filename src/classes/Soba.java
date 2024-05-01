@@ -8,10 +8,10 @@ public enum Soba {
 
     public static Soba odOznake(String oznaka){
         switch (oznaka){
-            case "JEDNOKREVETNA": return JEDNOKREVETNA;
-            case "DVOKREVETNA": return DVOKREVETNA;
-            case "TROKREVETNA": return TROKREVETNA;
-            case "APARTMAN": return APARTMAN;
+            case "jednokevetna": return JEDNOKREVETNA;
+            case "dvokrevetna": return DVOKREVETNA;
+            case "trokrevetna": return TROKREVETNA;
+            case "apartman": return APARTMAN;
             default: return null;
         }
     }

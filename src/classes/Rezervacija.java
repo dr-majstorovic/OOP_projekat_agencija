@@ -25,6 +25,8 @@ public class Rezervacija {
     }
 
     private static double racunajCijena(Aranzman aranzman){
+        if(aranzman.getDatumPolaska().equals(aranzman.getDatumDolaska()))
+            return aranzman.getCijena();
         return aranzman.getCijena() + aranzman.getSmjestaj().getCijenaPN() * aranzman.getTrajanje();
     }
 

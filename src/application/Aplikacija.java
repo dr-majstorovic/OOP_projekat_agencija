@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 public class Aplikacija extends Application{
 
-    public static ArrayList<Scene> nazad = new ArrayList<>(), naprijed = new ArrayList<>();
-
     public static void main(String[] args) {
         Database.init();
         launch(args);

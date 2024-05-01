@@ -43,10 +43,10 @@
             </Button>
             <Label fx:id="potrosenoLabel" layoutX="509.0" layoutY="15.0" prefHeight="17.0" prefWidth="80.0" />
             <Label fx:id="doplatitiLabel" layoutX="479.0" layoutY="37.0" prefHeight="17.0" prefWidth="92.0" />
-            <GridPane layoutX="232.0" layoutY="46.0" prefHeight="206.0" prefWidth="235.0">
+            <GridPane layoutX="232.0" layoutY="46.0" prefHeight="201.0" prefWidth="458.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="72.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="163.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="65.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="398.0" minWidth="10.0" prefWidth="393.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -71,7 +71,7 @@
                   <Label fx:id="labelPolazak" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label fx:id="labelDolazak" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label fx:id="labelCijena" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label fx:id="labelSmjestaj" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="labelSmjestaj" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                </children>
             </GridPane>
             <Button fx:id="obrisiButton" layoutX="478.0" layoutY="14.0" mnemonicParsing="false" onAction="#obrisiAranzman" prefHeight="29.0" prefWidth="143.0" text="Obriši aranžman" />

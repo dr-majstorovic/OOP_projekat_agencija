@@ -68,12 +68,15 @@ public class AdminPregledController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setZaradaDug();
+        labelSmjestaj.setText("");
         greska.setVisible(false);
         obrisiButton.setVisible(false);
         klijentiPane.setVisible(false);
         aranzmanBox.getItems().addAll(Aranzman.all);
         aranzmanBox.getSelectionModel().selectedItemProperty().addListener(((observableValue, aranzman, t1) -> {
             izabraniAranzman = aranzmanBox.getSelectionModel().getSelectedItem();
+            if(izabraniAranzman == null)
+                return;
             obrisiButton.setVisible(true);
             labelNaziv.setText(izabraniAranzman.getNaziv());
             labelDestinacija.setText(izabraniAranzman.getDestinacija());
@@ -81,7 +84,10 @@ public class AdminPregledController implements Initializable {
             labelPolazak.setText(izabraniAranzman.getDatumPolaska().toString());
             labelDolazak.setText(izabraniAranzman.getDatumDolaska().toString());
             labelCijena.setText(Double.toString(izabraniAranzman.getCijena()));
-            labelSmjestaj.setText(izabraniAranzman.getSmjestaj().toString());
+            if(izabraniAranzman.getSmjestaj() == null)
+                labelSmjestaj.setText("N/A");
+            else
+                labelSmjestaj.setText(izabraniAranzman.getSmjestaj().toString());
 
             klijentiPane.setVisible(true);
             labelIme.setText("");
@@ -92,6 +98,8 @@ public class AdminPregledController implements Initializable {
             klijentiBox.getItems().addAll(getKlijenti());
             klijentiBox.getSelectionModel().selectedItemProperty().addListener(((observableValue1, klijent, t11) -> {
                 izabraniKlijent = klijentiBox.getSelectionModel().getSelectedItem();
+                if(izabraniKlijent == null)
+                    return;
                 labelIme.setText(izabraniKlijent.getIme() + " " + izabraniKlijent.getPrezime());
                 Rezervacija rezervacija = null;
 
@@ -103,7 +111,7 @@ public class AdminPregledController implements Initializable {
                 assert rezervacija != null;
                 labelUplatio.setText(Double.toString(rezervacija.getPlaceno()));
                 labelDuguje.setText(Double.toString(rezervacija.getUkupnaCijena() - rezervacija.getPlaceno()));
-                labelBrTel.setText(klijent.getBrojTelefona());
+                labelBrTel.setText(izabraniKlijent.getBrojTelefona());
             }));
 
         }));

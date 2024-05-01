@@ -4,6 +4,7 @@ import classes.Aranzman;
 import classes.BankovniRacun;
 import classes.Klijent;
 import classes.Rezervacija;
+import database.Write;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,6 +65,8 @@ public class KlijentPregledController implements Initializable {
 
     public void setKlijent(Klijent k){
         klijent = k;
+        pokupiRezervacije(rezervacije);
+        racunajPotrosenoDoplatiti();
     }
 
     @Override
@@ -72,10 +75,10 @@ public class KlijentPregledController implements Initializable {
         objasnjenje.setVisible(false);
         aranzmanInfo.setVisible(false);
         rezervacijaAction.setVisible(false);
-        pokupiRezervacije(rezervacije);
-        racunajPotrosenoDoplatiti();
         listaRezervacija.getSelectionModel().selectedItemProperty().addListener(((observableValue, rezervacija, t1) -> {
             izabranaRezervacija = listaRezervacija.getSelectionModel().getSelectedItem();
+            if(izabranaRezervacija == null)
+                return;
             aranzmanInfo.setVisible(true);
             rezervacijaAction.setVisible(true);
             greska.setVisible(false);
@@ -85,7 +88,11 @@ public class KlijentPregledController implements Initializable {
             labelPrevoz.setText(izabranaRezervacija.getAranzman().getPrevoz().toString());
             labelPolazak.setText(izabranaRezervacija.getAranzman().getDatumPolaska().toString());
             labelDolazak.setText(izabranaRezervacija.getAranzman().getDatumDolaska().toString());
-            labelSmjestaj.setText(izabranaRezervacija.getAranzman().getSmjestaj().toString());
+
+            if(izabranaRezervacija.getAranzman().getSmjestaj() == null)
+                labelSmjestaj.setText("N/A");
+            else
+                labelSmjestaj.setText(izabranaRezervacija.getAranzman().getSmjestaj().toString());
 
             labelCijena.setText(Double.toString(izabranaRezervacija.getUkupnaCijena()));
             labelUplaceno.setText(Double.toString(izabranaRezervacija.getPlaceno()));
@@ -93,11 +100,12 @@ public class KlijentPregledController implements Initializable {
         }));
     }
 
-    // metoda koja sakuplja u jednu listu sve rezervacije idabranog korisnika
+    // metoda koja sakuplja u jednu listu sve rezervacije izabranog korisnika
     private void pokupiRezervacije(ArrayList<Rezervacija> lista){
         for(Rezervacija r: Rezervacija.all)
-            if(r.getKlijent().equals(this.klijent))
+            if(r.getKlijent().getId() == klijent.getId()) {
                 lista.add(r);
+            }
     }
 
     private void racunajPotrosenoDoplatiti(){
@@ -172,7 +180,7 @@ public class KlijentPregledController implements Initializable {
         }
 
         String password = lozinka.getText();
-        if(password.equals(klijent.getLozinka())){
+        if(!password.equals(klijent.getLozinka())){
             greska.setText("Pogrešna lozinka");
             greska.setVisible(true);
             return;
@@ -195,9 +203,25 @@ public class KlijentPregledController implements Initializable {
         racun.setStanje(racun.getStanje()-iznos);
         agencija.setStanje(agencija.getStanje()+iznos);
 
+        izabranaRezervacija.setPlaceno(izabranaRezervacija.getPlaceno() + iznos);
+
+        try{
+            Write.updateBankovniRacun(racun);
+            Write.updateBankovniRacun(agencija);
+            Write.updatePlacenaCijena(izabranaRezervacija);
+        }catch (SQLException sqle){
+            greska.setText("Greška sa bazom.");
+            greska.setVisible(true);
+            sqle.printStackTrace();
+            return;
+        }
+
         AlertBox.display("Transakcija uspješna\nTrenutno stanje na vašem računu:\n" + racun.getStanje());
 
         racunajPotrosenoDoplatiti();
+        labelUplaceno.setText(Double.toString(izabranaRezervacija.getPlaceno()));
+        labelDoplatiti.setText(Double.toString(izabranaRezervacija.getUkupnaCijena() - izabranaRezervacija.getPlaceno()));
+
         greska.setVisible(false);
     }
 

@@ -47,7 +47,7 @@ public class KlijentRezervacijaController implements Initializable {
     Scene scene;
 
     public Klijent klijent;
-    ArrayList<Aranzman> aranzmani;
+    ArrayList<Aranzman> aranzmani = new ArrayList<>();
     Aranzman izabraniAranzman = null;
 
     int ivp = 1; // izlet vs putovanje -> i = 1, p = 2;
@@ -58,6 +58,8 @@ public class KlijentRezervacijaController implements Initializable {
         if(aranzmani != null)
             listaAranzmana.getItems().addAll(aranzmani);
         listaAranzmana.getSelectionModel().selectedItemProperty().addListener((observableValue, aranzman, t1) -> {
+            if(listaAranzmana.getItems().isEmpty())
+                return;
             izabraniAranzman = listaAranzmana.getSelectionModel().getSelectedItem();
             greska.setText("");
             labelNaziv.setText(izabraniAranzman.getNaziv());
@@ -143,16 +145,22 @@ public class KlijentRezervacijaController implements Initializable {
             greska.setText("Prvo izaberite aranžman.");
             return;
         }
-        if(BankovniRacun.getFromJMBG(klijent.getJMBG()).getStanje() < izabraniAranzman.getCijena()/2){
+        BankovniRacun klijentBR = BankovniRacun.getFromJMBG(klijent.getJMBG());
+        if(klijentBR.getStanje() < izabraniAranzman.getCijena()/2){
             greska.setText("Nemate dovljno novca na računu.");
         }else{
             Rezervacija rezervacija = new Rezervacija(klijent, izabraniAranzman, izabraniAranzman.getCijena()/2, "ne");
+            System.out.println(izabraniAranzman);
             BankovniRacun agencija = BankovniRacun.getFromJMBG("1102541293");
             agencija.setStanje(agencija.getStanje() + izabraniAranzman.getCijena()/2);
+            klijentBR.setStanje(klijentBR.getStanje() - izabraniAranzman.getCijena()/2);
             try {
                 Write.writeRezervacija(rezervacija);
+                Write.updateBankovniRacun(klijentBR);
+                Write.updateBankovniRacun(agencija);
             } catch (SQLException e) {
                 greska.setText("Greska sa bazom.");
+                e.printStackTrace();
                 return;
             }
             AlertBox.display("Rezervacija uspješna.");
@@ -162,6 +170,9 @@ public class KlijentRezervacijaController implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+
+            KlijentController klijentController = loader.getController();
+            klijentController.setKorisnik(klijent);
 
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -187,6 +198,15 @@ public class KlijentRezervacijaController implements Initializable {
     }
 
     public void filtriraj(ActionEvent event){
+
+        greska.setText("");
+        labelNaziv.setText("");
+        labelDestinacija.setText("");
+        labelPrevoz.setText("");
+        labelPolazak.setText("");
+        labelDolazak.setText("");
+        labelCijena.setText("");
+        labelSmjestaj.setText("");
         ArrayList<Aranzman> spisak;
         ArrayList<Aranzman> filtrirano = new ArrayList<>();
         if(ivp == 1)
@@ -258,7 +278,7 @@ public class KlijentRezervacijaController implements Initializable {
                 if(!a.getDestinacija().equals(dest))
                     continue;
             }
-            if (cl){
+            if(cl){
                 if(a.getCijena() < cL)
                     continue;
             }

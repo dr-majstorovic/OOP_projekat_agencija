@@ -39,7 +39,7 @@ public class BankovniRacun {
 
     public static BankovniRacun getFromJMBG(String br) {
         for(BankovniRacun x: all){
-            if(x.getBrojRacuna().equals(br))
+            if(x.getJMBG().equals(br))
                 return x;
         }
         return null;

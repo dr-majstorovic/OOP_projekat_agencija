@@ -39,8 +39,8 @@ public class Write {
     public static void writeAranzman(Aranzman aranzman) throws SQLException{
         String upit = "INSERT INTO aranzman (naziv_putovanja, destinacija, prevoz, datum_polaska, datum_dolaska, cijena_aranzmana, smjestaj_id) " +
                 "VALUES ('" + aranzman.getNaziv() + "', '" + aranzman.getDestinacija() + "', '" + aranzman.getPrevoz().name() +
-                "', " + Date.valueOf(aranzman.getDatumPolaska()) + ", " + Date.valueOf(aranzman.getDatumDolaska()) +
-                ", " + aranzman.getCijena() + ", ";
+                "', '" + Date.valueOf(aranzman.getDatumPolaska()) + "', '" + Date.valueOf(aranzman.getDatumDolaska()) +
+                "', " + aranzman.getCijena() + ", ";
         if(aranzman.getSmjestaj() == null){
             upit += "NULL);";
         }else {
@@ -57,7 +57,7 @@ public class Write {
     }
 
     public static void writeSmjestaj(Smjestaj smjestaj) throws SQLException{
-        String upit = "INSERT INTO smjestaj (naziv, broj_zvjezdica, vrsta_sobe, cijena_po_nocenju) VALUES ('" +
+        String upit = "INSERT INTO smjestaj (naziv, broj_zvjezdica, vrsta_sobe, cjena_po_nocenju) VALUES ('" +
                 smjestaj.getNaziv() + "', " + smjestaj.getBrojZvjezdica() + ", '" + smjestaj.getVrstaSobe() + "', " + smjestaj.getCijenaPN() + ");";
         Statement iskaz = connection.createStatement();
         iskaz.executeUpdate(upit);
@@ -79,7 +79,7 @@ public class Write {
 
     public static void writeRezervacija(Rezervacija rezervacija) throws SQLException{
         String upit = "INSERT INTO rezervacija VALUES (" + rezervacija.getKlijent().getId() + ", " + rezervacija.getAranzman().getId() +
-                ", " + rezervacija.getUkupnaCijena() + ", " + rezervacija.getPlaceno() + ", " + rezervacija.getOtkazana() + ");";
+                ", " + rezervacija.getUkupnaCijena() + ", " + rezervacija.getPlaceno() + ", '" + rezervacija.getOtkazana() + "');";
         Statement iskaz = connection.createStatement();
         iskaz.executeUpdate(upit);
 
@@ -98,6 +98,20 @@ public class Write {
     public static void deleteAranzman(Aranzman aranzman) throws SQLException{
         String upit = "DELETE FROM rezervacija WHERE Aranzman_id = " + aranzman.getId() + ";\n" +
                 "DELETE FROM aranzman WHERE id = " + aranzman.getId() + ";";
+
+        Statement iskaz = connection.createStatement();
+        iskaz.executeUpdate(upit);
+    }
+
+    public static void updatePlacenaCijena(Rezervacija rezervacija) throws SQLException{
+        String upit = "UPDATE rezervacija SET placena_cijena = " + rezervacija.getPlaceno() + " WHERE Klijent_id = "
+                + rezervacija.getKlijent().getId() + " AND Aranzman_id = " + rezervacija.getAranzman().getId() + ";";
+        Statement iskaz = connection.createStatement();
+        iskaz.executeUpdate(upit);
+    }
+
+    public static void updateBankovniRacun(BankovniRacun bankovniRacun) throws SQLException{
+        String upit = "UPDATE bankovni_racun SET stanje = " + bankovniRacun.getStanje() + " WHERE broj_racuna = '" + bankovniRacun.getBrojRacuna() + "';";
 
         Statement iskaz = connection.createStatement();
         iskaz.executeUpdate(upit);
