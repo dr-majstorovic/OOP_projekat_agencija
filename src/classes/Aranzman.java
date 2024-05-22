@@ -73,6 +73,8 @@ public class Aranzman {
         return Period.between(datumPolaska, datumDolaska).getDays();
     }
 
+    public double getUkupnaCijena() { return  cijena + smjestaj.getCijenaPN() * getTrajanje(); }
+
     public static Aranzman getFromID(int id) {
         for(Aranzman x: all){
             if(x.getId() == id)

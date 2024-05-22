@@ -133,7 +133,7 @@ public class AdminPregledController implements Initializable {
     private ArrayList<Klijent> getKlijenti(){
         ArrayList<Klijent> klijenti = new ArrayList<>();
         for (Rezervacija r: Rezervacija.all){
-            if(r.getAranzman().equals(izabraniAranzman)){
+            if(r.getAranzman().equals(izabraniAranzman) && r.getOtkazana().equals("ne")){
                 klijenti.add(r.getKlijent());
             }
         }

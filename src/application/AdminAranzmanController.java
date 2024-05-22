@@ -129,6 +129,7 @@ public class AdminAranzmanController implements Initializable {
                 Aranzman aranzman = new Aranzman(-1, nazi, dest, tipp, dpolaska, dpovratka, cije, smjestaj);
 
                 database.Write.writeAranzman(aranzman);
+                AlertBox.display("Uspješno ste dodali aranžman \"" + aranzman + "\"");
             }catch (Exception e){
                 greska.setText("Neuspješno. Provjerite podatke i pokušajte ponovo.");
                 greska.setVisible(true);
@@ -145,6 +146,8 @@ public class AdminAranzmanController implements Initializable {
 
                 Aranzman aranzman = new Aranzman(-1, nazi, dest, tipp, dpolaska, dpolaska, cije, null);
                 database.Write.writeAranzman(aranzman);
+
+                AlertBox.display("Uspješno ste dodali aranžman \"" + aranzman + "\"");
             }catch (Exception e){
                 greska.setText("Neuspješno. Provjerite podatke i pokušajte ponovo.");
                 greska.setVisible(true);

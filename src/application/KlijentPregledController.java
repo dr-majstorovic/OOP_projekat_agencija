@@ -79,8 +79,8 @@ public class KlijentPregledController implements Initializable {
             izabranaRezervacija = listaRezervacija.getSelectionModel().getSelectedItem();
             if(izabranaRezervacija == null)
                 return;
+
             aranzmanInfo.setVisible(true);
-            rezervacijaAction.setVisible(true);
             greska.setVisible(false);
 
             labelNaziv.setText(izabranaRezervacija.getAranzman().getNaziv());
@@ -93,6 +93,10 @@ public class KlijentPregledController implements Initializable {
                 labelSmjestaj.setText("N/A");
             else
                 labelSmjestaj.setText(izabranaRezervacija.getAranzman().getSmjestaj().toString());
+
+            if(izabranaRezervacija.getOtkazana().equals("da") || izabranaRezervacija.getAranzman().getDatumPolaska().isBefore(LocalDate.now()))
+                return;
+            rezervacijaAction.setVisible(true);
 
             labelCijena.setText(Double.toString(izabranaRezervacija.getUkupnaCijena()));
             labelUplaceno.setText(Double.toString(izabranaRezervacija.getPlaceno()));
@@ -114,6 +118,8 @@ public class KlijentPregledController implements Initializable {
 
         if(rezervacije != null)
             for(Rezervacija r: rezervacije){
+                if(r.getOtkazana().equals("da"))
+                    continue;
                 potroseno += r.getPlaceno();
                 doplatiti += r.getUkupnaCijena();
             }
@@ -125,6 +131,7 @@ public class KlijentPregledController implements Initializable {
 
     public void dugmeAktivne(ActionEvent event){
         objasnjenje.setVisible(true);
+        aranzmanInfo.setVisible(false);
         ArrayList<Rezervacija> aktivneRezervacije = new ArrayList<>();
 
         for (Rezervacija r: rezervacije){
@@ -141,6 +148,7 @@ public class KlijentPregledController implements Initializable {
         objasnjenje.setVisible(false);
         aranzmanInfo.setVisible(false);
         rezervacijaAction.setVisible(false);
+        aranzmanInfo.setVisible(false);
 
         ArrayList<Rezervacija> protekleRezervacije = new ArrayList<>();
 
@@ -156,6 +164,9 @@ public class KlijentPregledController implements Initializable {
 
     public void dugmeOtkazane(ActionEvent event){
         objasnjenje.setVisible(false);
+        aranzmanInfo.setVisible(false);
+        rezervacijaAction.setVisible(false);
+        aranzmanInfo.setVisible(false);
 
         ArrayList<Rezervacija> otkazaneRezervacije = new ArrayList<>();
 
@@ -248,11 +259,14 @@ public class KlijentPregledController implements Initializable {
             }
 
             database.Write.updateOtkazana(izabranaRezervacija);
+            database.Write.updateBankovniRacun(racun);
+            database.Write.updateBankovniRacun(agencija);
             AlertBox.display("Rezervacija uspješno otkazana.\nTrenutno stanje na vašem računu:\n" + racun.getStanje());
             listaRezervacija.getItems().clear();
 
         }catch (SQLException SQLe){
             AlertBox.display("Greška u bazi podataka.\nOtkazivanje neuspješno.");
+            SQLe.printStackTrace();
         }
     }
 

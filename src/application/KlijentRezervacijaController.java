@@ -146,14 +146,14 @@ public class KlijentRezervacijaController implements Initializable {
             return;
         }
         BankovniRacun klijentBR = BankovniRacun.getFromJMBG(klijent.getJMBG());
-        if(klijentBR.getStanje() < izabraniAranzman.getCijena()/2){
+        if(klijentBR.getStanje() < izabraniAranzman.getUkupnaCijena()/2){
             greska.setText("Nemate dovljno novca na računu.");
         }else{
-            Rezervacija rezervacija = new Rezervacija(klijent, izabraniAranzman, izabraniAranzman.getCijena()/2, "ne");
+            Rezervacija rezervacija = new Rezervacija(klijent, izabraniAranzman, izabraniAranzman.getUkupnaCijena()/2, "ne");
             System.out.println(izabraniAranzman);
             BankovniRacun agencija = BankovniRacun.getFromJMBG("1102541293");
-            agencija.setStanje(agencija.getStanje() + izabraniAranzman.getCijena()/2);
-            klijentBR.setStanje(klijentBR.getStanje() - izabraniAranzman.getCijena()/2);
+            agencija.setStanje(agencija.getStanje() + izabraniAranzman.getUkupnaCijena()/2);
+            klijentBR.setStanje(klijentBR.getStanje() - izabraniAranzman.getUkupnaCijena()/2);
             try {
                 Write.writeRezervacija(rezervacija);
                 Write.updateBankovniRacun(klijentBR);

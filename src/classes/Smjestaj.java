@@ -50,7 +50,7 @@ public class Smjestaj {
 
     @Override
     public String toString() {
-        return naziv + ", zvjezdica: (" + brojZvjezdica + "), " + vrstaSobe + " soba";
+        return naziv + ", zvjezdica: (" + brojZvjezdica + "), " + vrstaSobe + " soba, cijena noćenja: " + cijenaPN + "KM";
     }
 
     public void setId(int id) {

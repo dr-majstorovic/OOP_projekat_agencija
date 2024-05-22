@@ -87,11 +87,14 @@ public class Write {
 
     public static void updateOtkazana(Rezervacija rezervacija) throws SQLException{
         String upit = "UPDATE rezervacija SET otkazana = '" + rezervacija.getOtkazana() + "' WHERE Klijent_id = " +
-                rezervacija.getKlijent().getId() + " AND Aranzman_id = " + rezervacija.getAranzman().getId() + ";\n" +
-                "UPDATE rezervacija SET placena_cijena = '" + rezervacija.getPlaceno() + "'WHERE Klijent_id = " +
                 rezervacija.getKlijent().getId() + " AND Aranzman_id = " + rezervacija.getAranzman().getId() + ";";
 
         Statement iskaz = connection.createStatement();
+        iskaz.executeUpdate(upit);
+
+        upit = "UPDATE rezervacija SET placena_cijena = " + rezervacija.getPlaceno() + " WHERE Klijent_id = " +
+                rezervacija.getKlijent().getId() + " AND Aranzman_id = " + rezervacija.getAranzman().getId() + ";";
+
         iskaz.executeUpdate(upit);
     }
 
