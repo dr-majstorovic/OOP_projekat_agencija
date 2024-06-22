@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class AlertBox {
 
-    public static void display(String message){
+    public static void display(String message, String button){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setMinWidth(250);
@@ -21,7 +21,7 @@ public class AlertBox {
         poruka.setText(message);
 
         Button dugme = new Button();
-        dugme.setText("Nice");
+        dugme.setText(button);
         dugme.setOnAction(e -> window.close());
 
         VBox layout = new VBox();

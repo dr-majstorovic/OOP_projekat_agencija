@@ -2,8 +2,6 @@ package application;
 
 import classes.*;
 import database.Write;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -163,7 +161,7 @@ public class KlijentRezervacijaController implements Initializable {
                 e.printStackTrace();
                 return;
             }
-            AlertBox.display("Rezervacija uspješna.");
+            AlertBox.display("Rezervacija uspješna.", ":)");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/klijent.fxml"));
             try {
                 root = loader.load();
@@ -214,95 +212,52 @@ public class KlijentRezervacijaController implements Initializable {
         else
             spisak = Aranzman.putovanja;
 
-        // PROMJENLJIVE ZA INDIKACIJU DA LI SE NEKI FILTER RAZMATRA ILI NE
-        boolean brz = false; // broj zvjezdica smjestaja
-        boolean des = false; // destinacija
-        boolean cl; // minimalna cijena (cijena low)
-        boolean ch; // maksimalna cijena (cijena high)
-        boolean vs = false; // vrsta smještaja
-        boolean p = false; // vrsta prevoza
-        boolean dl = false; // minimalni datum (datum low)
-        boolean dh = false; // maksimalni datum (datum high)
-
         // PROMJENLJIVE SA ZAHTIJEVANIM VRIJEDNOSTIMA FILTERA
         Integer brZ = brZvjezdica.getValue();
-        if(brZ != null)
-            brz = true;
+        if(brZ == null)
+            brZ = 0;
 
         String dest = destinacija.getSelectionModel().getSelectedItem();
-        if(dest != null)
-            des = true;
+        if(dest == null)
+            dest = "";
 
-        Double cL = null;
+        Double cL;
         try{
             cL = Double.parseDouble(cijenaLow.getText());
-            cl = true;
         }catch (NumberFormatException nfe){
-            cl = false;
+            cL = 0.0;
         }
 
-        Double cH = null;
+        Double cH;
         try{
             cH = Double.parseDouble(cijenaHigh.getText());
-            ch = true;
         }catch (NumberFormatException nfe){
-            ch = false;
+            cH = 0.0;
         }
 
-        if(cL != null && cH != null && cL > cH){
+        if(cL > cH){
             Double temp = cL;
             cL = cH;
             cH = temp;
         }
 
-        Soba vrSobe = vrstaSobe.getValue();
-        if(vrSobe != null)
-            vs = true;
+        Soba vrSobe = vrstaSobe.getValue(); // can be null
 
-        Prevoz prev = prevoz.getValue();
-        if(prev != null)
-            p = true;
+        Prevoz prev = prevoz.getValue(); // can be null
 
-        LocalDate dL = dateLow.getValue(), dH = dateHigh.getValue(), td;
-        if(dL != null)
-            dl = true;
-        if(dH != null)
-            dh = true;
+        LocalDate dL = dateLow.getValue(), dH = dateHigh.getValue(); // can be null
 
         for(Aranzman a:spisak){
-            if(brz){
-                if(a.getSmjestaj().getBrojZvjezdica() != brZ)
-                    continue;
-            }
-            if(des){
-                if(!a.getDestinacija().equals(dest))
-                    continue;
-            }
-            if(cl){
-                if(a.getCijena() < cL)
-                    continue;
-            }
-            if(ch){
-                if(a.getCijena() > cH)
-                    continue;
-            }
-            if(vs){
-                if(!a.getSmjestaj().getVrstaSobe().equals(vrSobe))
-                    continue;
-            }
-            if(p){
-                if(!a.getPrevoz().equals(prev))
-                    continue;
-            }
-            if(dl){
-                if(a.getDatumPolaska().isBefore(dL))
-                    continue;
-            }
-            if(dh){
-                if(a.getDatumPolaska().isAfter(dH))
-                    continue;
-            }
-            filtrirano.add(a);
+            Filteri filteri = new Filteri(a);
+            if(filteri.brojZvjezdica(brZ) &&
+            filteri.destinacija(dest) &&
+            filteri.minimalnaCijena(cL) &&
+            filteri.maksimalnaCijena(cH) &&
+            filteri.vrstaSmjestaja(vrSobe) &&
+            filteri.vrstaPrevoza(prev) &&
+            filteri.minimalanDatum(dL) &&
+            filteri.maksimalanDatum(dH))
+                filtrirano.add(a);
         }
         listaAranzmana.getItems().clear();
         listaAranzmana.getItems().addAll(filtrirano);

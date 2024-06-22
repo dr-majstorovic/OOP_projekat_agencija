@@ -77,7 +77,7 @@ public class RegistracijaController {
             Klijent klijent = new Klijent(-1, ime.getText(), prezime.getText(), username.getText(), pass1.getText(), brTel.getText(), jmbg.getText(), brRacuna.getText());
             try{
                 database.Write.writeKlijent(klijent);
-                AlertBox.display("Uspješno ste se registrovali.");
+                AlertBox.display("Uspješno ste se registrovali.", ":)");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/aplikacija.fxml"));
                 root = loader.load();
 

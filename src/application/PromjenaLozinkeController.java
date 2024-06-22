@@ -70,7 +70,7 @@ public class PromjenaLozinkeController {
                 e.printStackTrace();
                 greskaLabel.setText("Greska u bazi podataka.");
             }
-            AlertBox.display("Uspješno ste promijenili lozinku");
+            AlertBox.display("Uspješno ste promijenili lozinku", ":)");
             String fxml = "../fxml/" + korisnik.getClass().getSimpleName().toLowerCase() + ".fxml";
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             try {

@@ -227,7 +227,7 @@ public class KlijentPregledController implements Initializable {
             return;
         }
 
-        AlertBox.display("Transakcija uspješna\nTrenutno stanje na vašem računu:\n" + racun.getStanje());
+        AlertBox.display("Transakcija uspješna\nTrenutno stanje na vašem računu:\n" + racun.getStanje(), "OK");
 
         racunajPotrosenoDoplatiti();
         labelUplaceno.setText(Double.toString(izabranaRezervacija.getPlaceno()));
@@ -261,11 +261,11 @@ public class KlijentPregledController implements Initializable {
             database.Write.updateOtkazana(izabranaRezervacija);
             database.Write.updateBankovniRacun(racun);
             database.Write.updateBankovniRacun(agencija);
-            AlertBox.display("Rezervacija uspješno otkazana.\nTrenutno stanje na vašem računu:\n" + racun.getStanje());
+            AlertBox.display("Rezervacija uspješno otkazana.\nTrenutno stanje na vašem računu:\n" + racun.getStanje(), ":)");
             listaRezervacija.getItems().clear();
 
         }catch (SQLException SQLe){
-            AlertBox.display("Greška u bazi podataka.\nOtkazivanje neuspješno.");
+            AlertBox.display("Greška u bazi podataka.\nOtkazivanje neuspješno.", ":(");
             SQLe.printStackTrace();
         }
     }

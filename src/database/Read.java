@@ -18,6 +18,7 @@ public class Read {
         readSmjestaj();
         readAranzman();
         readRezervacija();
+        readObavjestenje();
     }
 
     public static void readAdmin() throws SQLException {
@@ -126,5 +127,19 @@ public class Read {
         }
     }
 
+    public static void readObavjestenje() throws SQLException {
+        String upit = "SELECT * FROM obavjestenje;";
+        Statement iskaz = connection.createStatement();
+        ResultSet rezultat = iskaz.executeQuery(upit);
+
+        while(rezultat.next()){
+            int id = rezultat.getInt("id");
+            Klijent klijent = (Klijent)Korisnik.getFromID(rezultat.getInt("klijent_id"), "Klijent");
+            Aranzman aranzman = Aranzman.getFromID(rezultat.getInt("aranzman_id"));
+            double iznos = rezultat.getDouble("iznos");
+
+            new Obavjestenje(id, klijent, aranzman, iznos);
+        }
+    }
 
 }

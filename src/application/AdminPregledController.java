@@ -1,9 +1,6 @@
 package application;
 
-import classes.Admin;
-import classes.Aranzman;
-import classes.Klijent;
-import classes.Rezervacija;
+import classes.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -140,11 +137,21 @@ public class AdminPregledController implements Initializable {
         return klijenti;
     }
 
-    public void obrisiAranzman(ActionEvent event){
+    public void obrisiAranzman(ActionEvent event) {
         greska.setVisible(false);
         for (Rezervacija r: Rezervacija.all){
-            if (r.getAranzman().equals(izabraniAranzman))
+            if (r.getAranzman().equals(izabraniAranzman)){
                 Rezervacija.all.remove(r);
+                Obavjestenje obavjestenje = new Obavjestenje(0, r.getKlijent(), r.getAranzman(), r.getPlaceno());
+                try {
+                    database.Write.writeObavjestenje(obavjestenje);
+                } catch (SQLException e) {
+                    System.out.println("Greska u bazi");
+                    e.printStackTrace();
+                    greska.setText("Greska u bazi");
+                    greska.setVisible(true);
+                }
+            }
         }
         Aranzman.all.remove(izabraniAranzman);
         try {

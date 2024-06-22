@@ -82,7 +82,6 @@ public class Write {
                 ", " + rezervacija.getUkupnaCijena() + ", " + rezervacija.getPlaceno() + ", '" + rezervacija.getOtkazana() + "');";
         Statement iskaz = connection.createStatement();
         iskaz.executeUpdate(upit);
-
     }
 
     public static void updateOtkazana(Rezervacija rezervacija) throws SQLException{
@@ -114,7 +113,31 @@ public class Write {
     }
 
     public static void updateBankovniRacun(BankovniRacun bankovniRacun) throws SQLException{
-        String upit = "UPDATE bankovni_racun SET stanje = " + bankovniRacun.getStanje() + " WHERE broj_racuna = '" + bankovniRacun.getBrojRacuna() + "';";
+        String upit = "UPDATE bankovni_racun SET stanje = " + bankovniRacun.getStanje() + " WHERE broj_racuna = '"
+                + bankovniRacun.getBrojRacuna() + "';";
+
+        Statement iskaz = connection.createStatement();
+        iskaz.executeUpdate(upit);
+    }
+
+    public static void writeObavjestenje(Obavjestenje obavjestenje) throws SQLException{
+        String upit = "INSERT INTO obavjestenje (klijent_id, aranzman_id, iznos) VALUES ("
+                + obavjestenje.getKlijent().getId() + ", " + obavjestenje.getAranzman().getId() + ", "
+                + obavjestenje.getIznos() + ");";
+
+        Statement iskaz = connection.createStatement();
+        iskaz.executeUpdate(upit);
+
+        upit = "SELECT MAX(id) FROM obavjestenje;";
+        ResultSet rezultat = iskaz.executeQuery(upit);
+        int id = 0;
+        if(rezultat.next())
+            id = rezultat.getInt(1);
+        obavjestenje.setId(id);
+    }
+
+    public static void deleteObavjestenje(Obavjestenje obavjestenje) throws  SQLException{
+        String upit = "DELETE FROM obavjestenje WHERE id = " + obavjestenje.getId() + ";";
 
         Statement iskaz = connection.createStatement();
         iskaz.executeUpdate(upit);

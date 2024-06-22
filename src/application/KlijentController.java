@@ -2,6 +2,7 @@ package application;
 
 import classes.Klijent;
 import classes.Korisnik;
+import classes.Obavjestenje;
 import classes.Rezervacija;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -28,7 +30,7 @@ public class KlijentController implements Initializable {
     Stage stage;
 
     @FXML
-    Label ime, prezime, username, obavjestenje1, obavjestenje2;
+    Label ime, prezime, username, obavjestenje1;
 
     public void setKorisnik(Klijent k){
         klijent = k;
@@ -40,8 +42,19 @@ public class KlijentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        for(Obavjestenje o: Obavjestenje.all){
+            if (o.getKlijent().equals(klijent)){
+                AlertBox.display(o.toString(), ":(");
+                Obavjestenje.all.remove(o);
+                try {
+                    database.Write.deleteObavjestenje(o);
+                } catch (SQLException e) {
+                    System.out.println("Greska u bazi.");
+                }
+            }
+        }
+
         obavjestenje1.setVisible(false);
-        obavjestenje2.setVisible(false);
 
         for(Rezervacija r: Rezervacija.all){
             if(r.getKlijent().equals(klijent) && r.getOtkazana().equals("ne") && r.getAranzman().getDatumPolaska().isBefore(LocalDate.now().plusDays(17))){

@@ -71,7 +71,7 @@ public class NoviAdminController {
             Admin a = new Admin(-1, ime.getText(), prezime.getText(), username.getText(), "12345678");
             try{
                 database.Write.writeAdmin(a);
-                AlertBox.display("Registracija uspješna.");
+                AlertBox.display("Registracija uspješna.", ":)");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/admin.fxml"));
                 root = loader.load();
 
