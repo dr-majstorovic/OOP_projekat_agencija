@@ -97,13 +97,19 @@ public class KlijentRezervacijaController implements Initializable {
     public void izborIzlet(ActionEvent event){
         ivp = 1;
         listaAranzmana.getItems().clear();
-        listaAranzmana.getItems().addAll(Aranzman.izleti);
+        for(Aranzman a: aranzmani){
+            if(a.getDatumPolaska().equals(a.getDatumDolaska()))
+                listaAranzmana.getItems().add(a);
+        }
     }
 
     public void izborPutovanje(ActionEvent event){
         ivp = 2;
         listaAranzmana.getItems().clear();
-        listaAranzmana.getItems().addAll(Aranzman.putovanja);
+        for(Aranzman a: aranzmani){
+            if(!a.getDatumPolaska().equals(a.getDatumDolaska()))
+                listaAranzmana.getItems().add(a);
+        }
     }
 
     public void sortPolazak(ActionEvent event){

@@ -123,8 +123,8 @@ public class AdminPregledController implements Initializable {
                 dug += r.getUkupnaCijena() - r.getPlaceno();
         }
 
-        labelZarada.setText(Double.toString(zarada));
-        labelDug.setText(Double.toString(dug));
+        labelZarada.setText(String.format("%.2f", zarada));
+        labelDug.setText(String.format("%.2f", dug));
     }
 
     private ArrayList<Klijent> getKlijenti(){
@@ -141,9 +141,18 @@ public class AdminPregledController implements Initializable {
         greska.setVisible(false);
         for (Rezervacija r: Rezervacija.all){
             if (r.getAranzman().equals(izabraniAranzman)){
+
                 Rezervacija.all.remove(r);
                 Obavjestenje obavjestenje = new Obavjestenje(0, r.getKlijent(), r.getAranzman(), r.getPlaceno());
                 try {
+                    BankovniRacun racun = BankovniRacun.getFromJMBG(r.getKlijent().getJMBG());
+                    BankovniRacun agencija = BankovniRacun.getFromJMBG("1102541293");
+
+                    racun.setStanje(racun.getStanje() + r.getPlaceno());
+                    agencija.setStanje(agencija.getStanje() - r.getPlaceno());
+
+                    database.Write.updateBankovniRacun(racun);
+                    database.Write.updateBankovniRacun(agencija);
                     database.Write.writeObavjestenje(obavjestenje);
                 } catch (SQLException e) {
                     System.out.println("Greska u bazi");
@@ -163,6 +172,8 @@ public class AdminPregledController implements Initializable {
             greska.setVisible(true);
         }
         aranzmanBox.getSelectionModel().clearSelection();
+        aranzmanBox.getItems().clear();
+        aranzmanBox.getItems().addAll(Aranzman.all);
         obrisiButton.setVisible(false);
         labelNaziv.setText("");
         labelDestinacija.setText("");

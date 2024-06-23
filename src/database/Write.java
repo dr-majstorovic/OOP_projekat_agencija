@@ -98,11 +98,9 @@ public class Write {
     }
 
     public static void deleteAranzman(Aranzman aranzman) throws SQLException{
-        String upit = "DELETE FROM rezervacija WHERE Aranzman_id = " + aranzman.getId() + ";\n" +
-                "DELETE FROM aranzman WHERE id = " + aranzman.getId() + ";";
-
         Statement iskaz = connection.createStatement();
-        iskaz.executeUpdate(upit);
+        iskaz.executeUpdate("DELETE FROM rezervacija WHERE Aranzman_id = " + aranzman.getId() + ";");
+        iskaz.executeUpdate("DELETE FROM aranzman WHERE id = " + aranzman.getId() + ";");
     }
 
     public static void updatePlacenaCijena(Rezervacija rezervacija) throws SQLException{

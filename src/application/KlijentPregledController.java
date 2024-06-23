@@ -118,15 +118,16 @@ public class KlijentPregledController implements Initializable {
 
         if(rezervacije != null)
             for(Rezervacija r: rezervacije){
+                potroseno += r.getPlaceno();
                 if(r.getOtkazana().equals("da"))
                     continue;
-                potroseno += r.getPlaceno();
-                doplatiti += r.getUkupnaCijena();
+                if(LocalDate.now().isAfter(r.getAranzman().getDatumPolaska().minusDays(14)))
+                    continue;
+                doplatiti += r.getUkupnaCijena() - r.getPlaceno();
             }
-        doplatiti = doplatiti - potroseno;
 
-        potrosenoLabel.setText("" + potroseno);
-        doplatitiLabel.setText("" + doplatiti);
+        potrosenoLabel.setText(String.format("%.2f", potroseno));
+        doplatitiLabel.setText(String.format("%.2f", doplatiti));
     }
 
     public void dugmeAktivne(ActionEvent event){

@@ -123,7 +123,10 @@ public class Read {
             double pCijena = rezultat.getDouble("placena_cijena");
             String otkazana = rezultat.getString("otkazana");
 
-            new Rezervacija(klijent, aranzman, uCijena, pCijena, otkazana);
+            if(otkazana == "da")
+                new Rezervacija(klijent, aranzman, uCijena, pCijena, otkazana);
+            else
+                new Rezervacija(klijent, aranzman, pCijena, otkazana);
         }
     }
 

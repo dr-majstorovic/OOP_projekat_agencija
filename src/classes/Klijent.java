@@ -27,6 +27,6 @@ public class Klijent extends Korisnik{
 
     @Override
     public String toString() {
-        return korisnickoIme;
+        return ime + " " + prezime;
     }
 }
