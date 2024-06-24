@@ -138,7 +138,7 @@ public class Read {
         while(rezultat.next()){
             int id = rezultat.getInt("id");
             Klijent klijent = (Klijent)Korisnik.getFromID(rezultat.getInt("klijent_id"), "Klijent");
-            Aranzman aranzman = Aranzman.getFromID(rezultat.getInt("aranzman_id"));
+            String aranzman = rezultat.getString("aranzman");
             double iznos = rezultat.getDouble("iznos");
 
             new Obavjestenje(id, klijent, aranzman, iznos);

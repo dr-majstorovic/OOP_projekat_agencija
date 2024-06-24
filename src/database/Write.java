@@ -119,8 +119,8 @@ public class Write {
     }
 
     public static void writeObavjestenje(Obavjestenje obavjestenje) throws SQLException{
-        String upit = "INSERT INTO obavjestenje (klijent_id, aranzman_id, iznos) VALUES ("
-                + obavjestenje.getKlijent().getId() + ", " + obavjestenje.getAranzman().getId() + ", "
+        String upit = "INSERT INTO obavjestenje (klijent_id, aranzman, iznos) VALUES ("
+                + obavjestenje.getKlijent().getId() + ", '" + obavjestenje.getAranzman() + "', "
                 + obavjestenje.getIznos() + ");";
 
         Statement iskaz = connection.createStatement();

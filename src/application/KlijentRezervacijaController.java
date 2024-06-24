@@ -53,8 +53,8 @@ public class KlijentRezervacijaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         aktivniAranzmani();
-        if(aranzmani != null)
-            listaAranzmana.getItems().addAll(aranzmani);
+        //if(aranzmani != null)
+        //    listaAranzmana.getItems().addAll(aranzmani);
         listaAranzmana.getSelectionModel().selectedItemProperty().addListener((observableValue, aranzman, t1) -> {
             if(listaAranzmana.getItems().isEmpty())
                 return;
@@ -90,7 +90,7 @@ public class KlijentRezervacijaController implements Initializable {
     // obezbjeđuje da je aranžman aktivan i da klijent ima vremena da uplati potreban iznos
     public void aktivniAranzmani(){
         for(Aranzman a: Aranzman.all)
-            if(a.getDatumPolaska().isAfter(LocalDate.now().plusWeeks(2)))
+            if(a.getDatumPolaska().isAfter(LocalDate.now().plusDays(14)))
                 aranzmani.add(a);
     }
 
@@ -114,26 +114,14 @@ public class KlijentRezervacijaController implements Initializable {
 
     public void sortPolazak(ActionEvent event){
         KomparatorDatumPolaska komparator = new KomparatorDatumPolaska();
-        listaAranzmana.getItems().clear();
-        if (ivp == 1){
-            Aranzman.izleti.sort(komparator);
-            listaAranzmana.getItems().addAll(Aranzman.izleti);
-        }else{
-            Aranzman.putovanja.sort(komparator);
-            listaAranzmana.getItems().addAll(Aranzman.putovanja);
-        }
+        listaAranzmana.getItems().sort(komparator);
+
     }
 
     public void sortCijena(ActionEvent event){
         KomparatorCijena komparator = new KomparatorCijena();
-        listaAranzmana.getItems().clear();
-        if (ivp == 1){
-            Aranzman.izleti.sort(komparator);
-            listaAranzmana.getItems().addAll(Aranzman.izleti);
-        }else{
-            Aranzman.putovanja.sort(komparator);
-            listaAranzmana.getItems().addAll(Aranzman.izleti);
-        }
+        listaAranzmana.getItems().sort(komparator);
+
     }
 
     public void rezervisi(ActionEvent event){
@@ -254,16 +242,18 @@ public class KlijentRezervacijaController implements Initializable {
         LocalDate dL = dateLow.getValue(), dH = dateHigh.getValue(); // can be null
 
         for(Aranzman a:spisak){
-            Filteri filteri = new Filteri(a);
-            if(filteri.brojZvjezdica(brZ) &&
-            filteri.destinacija(dest) &&
-            filteri.minimalnaCijena(cL) &&
-            filteri.maksimalnaCijena(cH) &&
-            filteri.vrstaSmjestaja(vrSobe) &&
-            filteri.vrstaPrevoza(prev) &&
-            filteri.minimalanDatum(dL) &&
-            filteri.maksimalanDatum(dH))
-                filtrirano.add(a);
+            if(a.getDatumPolaska().isAfter(LocalDate.now().plusDays(14))) {
+                Filteri filteri = new Filteri(a);
+                if (filteri.brojZvjezdica(brZ) &&
+                        filteri.destinacija(dest) &&
+                        filteri.minimalnaCijena(cL) &&
+                        filteri.maksimalnaCijena(cH) &&
+                        filteri.vrstaSmjestaja(vrSobe) &&
+                        filteri.vrstaPrevoza(prev) &&
+                        filteri.minimalanDatum(dL) &&
+                        filteri.maksimalanDatum(dH))
+                    filtrirano.add(a);
+            }
         }
         listaAranzmana.getItems().clear();
         listaAranzmana.getItems().addAll(filtrirano);

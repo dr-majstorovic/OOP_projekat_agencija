@@ -39,7 +39,7 @@ public class Filteri {
             return true;
         if(aranzman.getSmjestaj() == null)
             return false;
-        return aranzman.getSmjestaj().equals(smjestaj);
+        return aranzman.getSmjestaj().getVrstaSobe().equals(smjestaj);
     }
 
     public boolean vrstaPrevoza(Prevoz prevoz){

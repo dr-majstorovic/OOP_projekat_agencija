@@ -6,11 +6,11 @@ public class Obavjestenje {
 
     private int id;
     private Klijent klijent;
-    private Aranzman aranzman;
+    private String aranzman;
     private double iznos;
     public static ArrayList<Obavjestenje> all = new ArrayList<>();
 
-    public Obavjestenje(int id, Klijent klijent, Aranzman aranzman, double iznos){
+    public Obavjestenje(int id, Klijent klijent, String aranzman, double iznos){
         this.id = id;
         this.klijent = klijent;
         this.aranzman = aranzman;
@@ -24,13 +24,14 @@ public class Obavjestenje {
 
     public Klijent getKlijent() { return klijent; }
 
-    public Aranzman getAranzman() { return aranzman; }
+    public String getAranzman() { return aranzman; }
 
     public double getIznos() { return iznos; }
 
     @Override
     public String toString() {
-        return "Vaša rezervacija za aranžman < " + aranzman + " > je otkazana. Na vaš račun je vraćeno " + iznos
-                + " KM.\nIzvinjavamo se zbog neprijatnosti.";
+        return "Vaša rezervacija za aranžman < " + aranzman + " > je otkazana.\nNa vaš račun je vraćeno " + iznos
+                + " KM.\nNovo stanje na računu: " + BankovniRacun.getFromJMBG(klijent.getJMBG()).getStanje()
+                + "\nIzvinjavamo se zbog neprijatnosti.";
     }
 }

@@ -19,6 +19,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -37,12 +38,10 @@ public class KlijentController implements Initializable {
         ime.setText(klijent.getIme());
         prezime.setText(klijent.getPrezime());
         username.setText(klijent.getKorisnickoIme());
-    }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<Obavjestenje> temp = List.copyOf(Obavjestenje.all);
 
-        for(Obavjestenje o: Obavjestenje.all){
+        for(Obavjestenje o: temp){
             if (o.getKlijent().equals(klijent)){
                 AlertBox.display(o.toString(), ":(");
                 Obavjestenje.all.remove(o);
@@ -57,11 +56,19 @@ public class KlijentController implements Initializable {
         obavjestenje1.setVisible(false);
 
         for(Rezervacija r: Rezervacija.all){
-            if(r.getKlijent().equals(klijent) && r.getOtkazana().equals("ne") && r.getAranzman().getDatumPolaska().isBefore(LocalDate.now().plusDays(17))){
+            if(r.getKlijent().equals(klijent) && r.getOtkazana().equals("ne") &&
+                    r.getAranzman().getDatumPolaska().isBefore(LocalDate.now().plusDays(17)) &&
+                    r.getPlaceno() != r.getUkupnaCijena()){
                 obavjestenje1.setVisible(true);
                 break;
             }
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
     }
 
     public void promjenaLozinke(ActionEvent event){

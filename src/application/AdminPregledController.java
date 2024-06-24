@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminPregledController implements Initializable {
@@ -139,11 +140,12 @@ public class AdminPregledController implements Initializable {
 
     public void obrisiAranzman(ActionEvent event) {
         greska.setVisible(false);
-        for (Rezervacija r: Rezervacija.all){
+        double izgubljeno = 0.0;
+        List<Rezervacija> temp = List.copyOf(Rezervacija.all);
+        for (Rezervacija r: temp){
             if (r.getAranzman().equals(izabraniAranzman)){
-
-                Rezervacija.all.remove(r);
-                Obavjestenje obavjestenje = new Obavjestenje(0, r.getKlijent(), r.getAranzman(), r.getPlaceno());
+                izgubljeno += r.getPlaceno();
+                Obavjestenje obavjestenje = new Obavjestenje(0, r.getKlijent(), r.getAranzman().toString(), r.getPlaceno());
                 try {
                     BankovniRacun racun = BankovniRacun.getFromJMBG(r.getKlijent().getJMBG());
                     BankovniRacun agencija = BankovniRacun.getFromJMBG("1102541293");
@@ -154,14 +156,20 @@ public class AdminPregledController implements Initializable {
                     database.Write.updateBankovniRacun(racun);
                     database.Write.updateBankovniRacun(agencija);
                     database.Write.writeObavjestenje(obavjestenje);
+                    Rezervacija.all.remove(r);
                 } catch (SQLException e) {
                     System.out.println("Greska u bazi");
                     e.printStackTrace();
                     greska.setText("Greska u bazi");
                     greska.setVisible(true);
+                } catch (Exception ostalo) {
+                    System.out.println("uh");
+                    ostalo.printStackTrace();
                 }
             }
         }
+        AlertBox.display("Aranžman uspješno obrisan. Agencija je izgubila ukupno " + izgubljeno
+                + " KM.", "OK");
         Aranzman.all.remove(izabraniAranzman);
         try {
             database.Write.deleteAranzman(izabraniAranzman);
